@@ -118,9 +118,9 @@
                                 <!--Gerando a Tabela de forma Dinamica //23121997-->
                                 @foreach ($dados as $funcionario)
                                               <tr>
-                                                  <td class="{{ ($funcionario->estado =='Activo') ? 'text-success' : '' }} {{ ($funcionario->estado =='Inactivo') ? 'text-danger' : '' }} {{ ($funcionario->estado =='Inactivo') ? 'text-danger' : '' }} {{ ($funcionario->estado =='Dispensado') ? 'text-warning' : '' }} {{ ($funcionario->estado =='Ferias') ? 'text-secondary' : '' }}" style="font-weight: bolder;">{{ $funcionario->estado }}</td>
-                                                  <td>{{ $funcionario->numeroAgente }}</td>
-                                                  <td>{{ $funcionario->nomeCompleto }}</td>
+                                              <td class="{{ ($funcionario->estado =='Activo') ? 'text-success' : '' }} {{ ($funcionario->estado =='Inactivo') ? 'text-danger' : '' }} {{ ($funcionario->estado =='Inactivo') ? 'text-danger' : '' }} {{ ($funcionario->estado =='Dispensado') ? 'text-warning' : '' }} {{ ($funcionario->estado =='Ferias') ? 'text-secondary' : '' }}" style="font-weight: bolder;">{{ $funcionario->estado }}</td>
+                                                  <td class="{{ ($funcionario->nomeCargo =='Director da Escola') ? 'font-weight-bolder' : '' }}" >{{ $funcionario->numeroAgente }}</td>
+                                                  <td class="{{ ($funcionario->nomeCargo =='Director da Escola') ? 'font-weight-bolder' : '' }}" >{{ $funcionario->nomeCompleto }}</td>
                                                   <td>{{ $funcionario->numeroBI }}</td>
                                                   @php
                                                     $data = \Carbon\Carbon::parse($funcionario->validadeBI);

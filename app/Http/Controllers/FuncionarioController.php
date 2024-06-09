@@ -57,7 +57,12 @@ class FuncionarioController extends Controller
               join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica
               join cargos on cargos.id=funcionarios.idCargo            
           '.$estado.$unidadeOrganica);
-          $titulo = $request->titulo;
+         if ($unidadeOrganica ==="") {
+            $titulo = $request->titulo;
+         }else {
+            $unidadeOrganica = UnidadeOrganica::find($idUnidadeOrganica);
+            $titulo = "FUNCIONÁRIOS DA ".$unidadeOrganica->designacao;
+         }
           $estado = $request->estado; 
           return view('sgrhe/pages/tables/funcionarios',compact('dados','titulo','estado','unidadeOrganica','idUnidadeOrganica'));
     }
