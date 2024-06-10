@@ -179,7 +179,7 @@
                                 <label for="cadastrarFunionario">Prosseguir à Funcionário </label>
                                
                               </div>
-                              <button type="submit" class="btn btn-primary" style="width: 100%;">{{ isset($pessoa) ? 'Actualizar Dados da Entidade Pessoa ' : 'Cadastrar Entidade Pessoa'}}</button>
+                              <button type="submit" class="btn btn-primary" style="width: 100%;">{{ isset($pessoa) ? 'Actualizar ' : 'Cadastrar'}}</button>
                             </form>
                             <!-- /form-->
                         </div>

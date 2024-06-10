@@ -98,7 +98,7 @@
                                             <!-- timeline time label -->
                                             <div class="time-label">
                                               <span class="bg-danger">
-                                                {{ strftime('%d de %B de %Y', strtotime($processom->created_at)) }}
+                                                {{ strftime('%d de %B de %Y %Hh %Mm', strtotime($processom->created_at)) }}
                                               </span>
                                             </div>
                                             <!-- /.timeline-label -->

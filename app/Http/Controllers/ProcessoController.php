@@ -22,14 +22,17 @@ class ProcessoController extends Controller
     public function darParecer(Request $request)
     {
        //dd($request->all());
+    
         if ($request->parecer === 'Favoravel') {
             $D = $request->Request;
             //Converetr o Request String Em Request Array
             parse_str($D, $Request);
-           // dd($Request);
+            $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;
+            dd($nomeFuncionario); 
             $Documento = $request->file('arquivo');
             //Nomear o Nome do Novo ficheiro PDF
-            $fileName = date('dmYHis').'file.pdf';
+            $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;
+            $fileName = $nomeFuncionario.'-'.date('dmYHis').'.pdf';
             $caminho = 'sgrhe/funcionarios/'.$Request['idFuncionarioSolicitante'].'/'.$Request['categoria'].'/'.$fileName;
             //dd($Documento);
             // Armazenar o arquivo no subdiretório dentro da pasta 'local Especifico'
@@ -65,8 +68,15 @@ class ProcessoController extends Controller
                         $funcionario = Funcionario::find($Request['idFuncionarioSolicitante']);
                        // dd($funcionario);
                         $funcionario->idUnidadeOrganica = $Request['idUnidadeOrganica'];
+                        //Se a pessoa a ser Trasferida for Director 
+                        $cargoFuncionarioSolicitante = Cargo::where('id', Funcionario::find($Request['idFuncionarioSolicitante'])->idCargo)->first()->designacao;
+                        if ($cargoFuncionarioSolicitante === "Director da Escola") {
+                            //Rebaixado para cargo de Professor cujo o id Cargo e 3
+                            $funcionario->idCargo = 3;
+                        }
                         $funcionario->save();
                     }
+                    
                     //Se Categoria for Licenca
                     if ($Request['categoria']=="Lecenca") {
                       dd('Licenca');
@@ -133,7 +143,8 @@ class ProcessoController extends Controller
         //Renderizar a View
         $Documento->render();
         //Nomear o Nome do Novo ficheiro PDF
-        $fileName = date('dmYHis').'file.pdf';
+        $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;
+        $fileName = $nomeFuncionario.'-'.$categoria.date('dmYHis').'.pdf';
         //Retornar o Domunento Gerado 
        // return response($Documento->output(), 200, ['Content-Type' => 'application/pdf', 'Content-Disposition' => 'inline; filename="'.$fileName.'"']);
         //return $Documento->download('file.pdf');
@@ -205,7 +216,8 @@ class ProcessoController extends Controller
         //Renderizar a View
         $Documento->render();
         //Nomear o Nome do Novo ficheiro PDF
-        $fileName = date('dmYHis').'file.pdf';
+        $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;
+        $fileName = $nomeFuncionario.'-'.$categoria.date('dmYHis').'.pdf';
         //Retornar o Domunento Gerado 
        // return response($Documento->output(), 200, ['Content-Type' => 'application/pdf', 'Content-Disposition' => 'inline; filename="'.$fileName.'"']);
         //return $Documento->download('file.pdf');
@@ -254,28 +266,36 @@ class ProcessoController extends Controller
 
     public function preview(Request $request)
     {
-        //Reconversao do Submit do ormularo armazenado no banco de dados
+        //Reconversao do Submit do ormularo armazenado no banco de dados //23121997
         $D = $request->Request;
         parse_str($D, $Request);
-        //dd($Request['seccao']);
+        //dd($Request);
         $categoria = $Request['categoria'];
         //Verificar se nao [e uma requisicao para imprimir um documento como guia de colocacao de marcha ou um outro documanto solicitado via requerimento
         if (isset($request->imprimir)) {
             $categoria = $request->imprimir;
         }
+        //Verificar se nao é uma guia de Transferencia
+        if($Request['categoria'] === "Transferencia"){
+            $unidadeOrganicaOndeVai = UnidadeOrganica::where('id', $Request['idUnidadeOrganica'])->first();
+        }else{
+            $unidadeOrganicaOndeVai = "";
+        }
+        //dd($unidadeOrganicaOndeVai) //23121997;
         $funcionario = Funcionario::where('id', $Request['idFuncionarioSolicitante'])->first();
         $pessoa = Pessoa::where('id', $funcionario->idPessoa)->first();
         $cargo =  Cargo::where('id', $funcionario->idCargo)->first();
         $categoriaFuncionario = categoriaFuncionario::where('id', $funcionario->idCategoriaFuncionario)->first();
         $unidadeOrganica = UnidadeOrganica::where('id', $funcionario->idUnidadeOrganica)->first();
-        $unidadeOrganicaOndeVai = UnidadeOrganica::where('id', $Request['idUnidadeOrganica'])->first();
+        
         $idProcesso = $request['idProcesso'];
         //Carregar a View
         $Documento = PDF::loadView("sgrhe/modelos/$categoria",compact('unidadeOrganicaOndeVai','Request','pessoa','funcionario','cargo','categoriaFuncionario','unidadeOrganica','idProcesso'));      
         //Renderizar a View
         $Documento->render();
         //Nomear o Nome do Novo ficheiro PDF
-        $fileName = 'file.pdf';
+        $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;
+        $fileName = $nomeFuncionario.'-'.$categoria.'.pdf';
         //Retornar o Domunento Gerado 
        // return view("sgrhe/modelos/$categoria",compact('Request','pessoa','funcionario','cargo','categoriaFuncionario'));
         return response($Documento->output(), 200, ['Content-Type' => 'application/pdf', 'Content-Disposition' => 'inline; filename="'.$fileName.'"']);
@@ -293,7 +313,7 @@ class ProcessoController extends Controller
 
 
 
-//Solicitar Processos Genericos 
+    //Solicitar Processos Genericos 
     public function solicitar(Request $request)
     { 
         
@@ -344,7 +364,7 @@ class ProcessoController extends Controller
 
 
 
-
+/*
     public function gerarDocumento(Request $request, string $idFuncionarioSolicitante)
     {
 
@@ -380,6 +400,7 @@ class ProcessoController extends Controller
       //  return view("sgrhe/modelos/$request->categoria",compact('Request','pessoa','funcionario','cargo','categoriaFuncionario'));
         //Registro o Processo no Bango de dados e Salvamento do Arquivo Gerado no Banco de Dados 
     }
+    */
 
 
 

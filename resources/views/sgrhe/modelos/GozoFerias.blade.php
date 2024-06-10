@@ -65,11 +65,10 @@ $dataI= new DateTime($Request['dataInicio']);
                         text-decoration: underline;
                 }
                 .titulo > p{
-                        text-align: left;
+                        text-align: center;
                         color: red;
                         position: relative;
-                        padding:0;
-                        margin: 1.5cm 0cm .5cm 0cm;
+                        padding:1.5;
                         font-weight: bold;
                 }
                 .introducao {
@@ -154,8 +153,12 @@ $dataI= new DateTime($Request['dataInicio']);
                 </div>
         </div>
         <div class="corpo">
-                <div class="titulo">
-                        <p>Pedido de Gozo de Férias #{{$idProcesso}} DMEP/{{ date('Y') }} </p>
+                <div class="titulo ">
+                        <br>
+                        <p>Pedido de Gozo de Férias </p>
+                        <br>
+                        <p style="text-align: left;">#{{ $idProcesso }}/{{ date('Y') }}DME-PÚRI</p>
+                        <br>
                 </div>
                 <div class="introducao">
                         <!--Extarindo os Proximos 30 dias do Dia Escolhido-->

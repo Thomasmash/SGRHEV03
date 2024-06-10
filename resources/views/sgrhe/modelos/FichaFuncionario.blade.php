@@ -66,9 +66,7 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                         color: red;
                         position: relative;
                         padding:1.5;
-                        margin: 1.5cm 0cm .5cm 0cm;
                         font-weight: bold;
-                        margin: 3px;
                 }
                 .corpo {
                         text-align: justify;
@@ -166,9 +164,8 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
         <div class="corpo">
                 <div class="titulo ">
                         <br>
-                        <p>Solicitacao de Tranferência </p>
+                        <p>Ficha do funcionário </p>
                         <br>
-                        <p style="text-align: left;">#{{ $idProcesso }}/{{ date('Y') }}DME-PÚRI</p>
                 </div>
                 <div class="corpo">
                         <p>

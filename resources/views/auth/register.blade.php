@@ -5,7 +5,9 @@
         </x-slot>
 
         <x-validation-errors class="mb-4" />
-
+        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+            <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Logar</a>
+        </div>
         <form method="POST" action="{{ route('register') }}">
             @csrf
 

@@ -53,8 +53,8 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form id="quickForm">
-                                  <div class="card-body">
+                                <div class="card-body">
+                                  <form id="quickForm">
                                     <div class="form-group">
                                           <input type="hidden" name="idPessoa"  value="{{ old('nomeCompleto',$pessoa->id ?? '') }}" readonly>
                                     </div>
@@ -123,10 +123,10 @@
                                             <option value="{{ old('id',$cargo->id ?? 'id') }}">{{ old('designacao',$cargo->designacao ?? $cargo->designacao) }}</option>
                                             @endforeach 
                                           </select>
-                                      </div>
+                                  </div>
 
                                       <!--Consultas para preencher o combobox do banco de dados de forma automatica para a tabela Unidade Organica-->
-                                      <div class="form-group">
+                                  <div class="form-group">
                                         <label for="idUnidadeOrganica">Unidade Orgânica</label>
                                           <select name="idUnidadeOrganica" class="form-control select2" required>
                                             <option selected="selected" value="{{ isset($opcoesUnidadeOrganica) ? $opcoesUnidadeOrganica->id : '' }}" >{{ isset($opcoesUnidadeOrganica) ? $opcoesUnidadeOrganica->designacao : 'Escolha uma Unidade Orgânica' }}</option>
@@ -137,40 +137,46 @@
                                             <option value="{{ old('id',$UnidadeOrganica->id ?? 'id') }}">{{ old('designacao',$UnidadeOrganica->designacao ?? 'designacao') }}</option>
                                             @endforeach 
                                           </select>
-                                      </div>
+                                  </div>
 
-                                    <div class="form-group">
+                                  <div class="form-group">
                                       <label for="iban">Coodenadas Bancarias (IBAN)</label>
                                       <br>
                                       <span class="text-danger"> OBS: Não incluir o indicativo (AO06) </span>
                                       <input type="text" name="iban" class="form-control" id="iban" value="{{ old('iban',$funcionario->iban ?? '') }}" maxlength="26" placeholder="0000.0000.0000.0000.0000.0" oninput="this.value = this.value.replace(/[^0-9]/g,'')" required>
-                                    </div>
+                                  </div>
 
-                                    <div class="form-group d-none">
+                                  <div class="form-group d-none">
                                       <label for="email">Email address</label>
                                       <input type="email" name="email" class="form-control" id="email" value="{{ old('email',$funcionario->email ?? '') }}" placeholder="Introduza um email">
-                                    </div>
-                                    <div class="form-group">
+                                  </div>
+                                  <div class="form-group">
                                       <label for="tel">Telefone</label>
                                       <input type="text" name="numeroTelefone" class="form-control" id="tel" value="{{ old('numeroTelefone',$funcionario->numeroTelefone ?? '') }}" placeholder="+244 92 000 000" >
-                                    </div>
+                                  </div>
                                     
-                                    <div class="form-group mb-0">
+                                  <div class="form-group mb-0">
                                       <div class="custom-control custom-checkbox">
                                         <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1" required>
                                         <label class="custom-control-label" for="exampleCheck1">Concordar em Submeter os dados do Funcionario nos termos<a href="#"> Termos de Regulamento Interno da Direção Municipal da Educação do Púri</a>.</label>
                                       </div>
-                                    </div>
                                   </div>
-                                  <!-- /.card-body -->
-                                  <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary" style="width: 100%;">{{isset($funcionario) ? 'Actualizar Funcionário':'Cadastrar Funcinário'}}</button>
-                                    <br>
-                                    <br>
-                                    <a href="{{route('funcionarios.index')}}" class="btn btn-primary" style="width: 100%;"> Funcionários / Index  </a>
-                                  </div>
-                                </form>
-                              </div>
+                                  <button type="submit" class="btn btn-primary" style="width: 100%;">{{isset($funcionario) ? 'Actualizar':'Cadastrar'}}</button> 
+                                  </form>
+                                </div>
+                                <div class="card-footer">
+                                  <form action="{{ route('funcionarios') }}" class="text-center small-box-footer">
+                                        @csrf
+                                        @method('POST')
+                                        <input type="hidden" name="titulo" value="Funcionários ">
+                                        <input type="hidden" name="estado" value="Todo">
+                                        <input type="submit" class="btn btn-primary w-100 p-10" value="Funcionários ">
+                                  </form>
+                                </div>
+                              
+                             
+                                
+                    </div>
                   </form>
                   @endif
 

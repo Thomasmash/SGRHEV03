@@ -37,9 +37,9 @@
                             <div class="card-header p-2">
                               <ul class="nav nav-pills">
                                 <li class="nav-item"><a class="nav-link active" href="#informacoes" data-toggle="tab">Informações de Perfil</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#password" data-toggle="tab">Actualizar Password</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#doisfactores" data-toggle="tab">Autenticação de dois fatores</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#sessoes" data-toggle="tab">Seccões em Browsers</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#password" data-toggle="tab">Alterar Password</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#doisfactores" data-toggle="tab">Autenticação em dois factores</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#sessoes" data-toggle="tab">Sessões em Browsers</a></li>
                                 <!--Essa Funcao é por enquanto Escluxiva do Admin para finc de Controle-->
                                 <li class="nav-item"><a class="nav-link" href="#delete" data-toggle="tab">Deletar a Conta</a></li>
                               </ul>

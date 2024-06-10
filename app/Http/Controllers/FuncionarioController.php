@@ -265,10 +265,11 @@ class FuncionarioController extends Controller
     }
     //Update
     public function update(Request $request, string $id)
-    { 
-        // dd($request->all());
+    {   
+         //dd($request->all());
            //Verificar se o Cargo de Director da Escla esta Elegivel
-           if ($request->idCargo == 4) {
+           $cargoSubmetido = Cargo::find($request->idCargo);
+           if ($cargoSubmetido->codNome === "DirectorEscola") {
                 $funcionario = Funcionario::where('idUnidadeOrganica', $request->idUnidadeOrganica)->where('idCargo', 4)->exists();
                 if ($funcionario) {
                     return redirect()->back()->with('error', 'O Cargo à Director para essa Escola não se encontra Disponível ');
@@ -311,10 +312,11 @@ class FuncionarioController extends Controller
                         // iniciando a transacao para as alterações no registro
                         if ($funcionario->save()) {
                             DB::commit();
-                            return redirect()->route('funcionarios.index')->with('success', 'Registro atualizado com sucesso.');
+                         
+                            return redirect()->back()->with('success', 'Registro atualizado com sucesso.');
                         }else {
                             DB::rollBack();
-                            return redirect()->back()->with('error', 'Erro de Acualização nda Entidade Funionário! ')->withErrors($request);
+                            return redirect()->back()->with('error', 'Erro de Acualização nda Entidade Funionário! ');
                         }
                 }
            }else{
@@ -356,7 +358,7 @@ class FuncionarioController extends Controller
                 // iniciando a transacao para as alterações no registro
                 if ($funcionario->save()) {
                     DB::commit();
-                    return redirect()->route('funcionarios.index')->with('success', 'Registro atualizado com sucesso.');
+                    return redirect()->back()->with('success', 'Registro atualizado com sucesso.');
                 }else {
                     DB::rollBack();
                     return redirect()->back()->with('error', 'Erro de Acualização nda Entidade Funionário! ')->withErrors($request);
@@ -375,10 +377,10 @@ class FuncionarioController extends Controller
             // Exclua o registro
             $funcionario->delete();
             // Redirecione de volta para a página desejada após a exclusão
-            return redirect()->route('funcionarios.index')->with('success', 'Registro excluído com sucesso.');
+            return redirect()->back()->with('success', 'Registro excluído com sucesso.');
         } else {
             // O registro não foi encontrado, faça o tratamento apropriado (por exemplo, redirecione com uma mensagem de erro)
-            return redirect()->route('pessoas.index')->with('error', 'Registro não encontrado, out erro de exclusao');
+            return redirect()->back()->with('error', 'Registro não encontrado, out erro de exclusao');
         }
     }
     public function formularioAvaliarDesempenhoFuncionario(Request $request)

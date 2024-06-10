@@ -69,9 +69,7 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                         color: red;
                         position: relative;
                         padding:1.5;
-                        margin: 1.5cm 0cm .5cm 0cm;
                         font-weight: bold;
-                        margin: 3px;
                 }
                 .corpo {
                         text-align: justify;

@@ -1,15 +1,15 @@
 <x-form-section submit="updatePassword">
     <x-slot name="title">
-        {{ __('Actualizar Password') }}
+        {{ __('Alterar Password') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Proteja a sua conta usando e aplicando as politicas de se seguranca de password.') }}
+        {{ __('Proteja a sua conta usando e aplicando as políticas de seguranca de password, combinando caracteres maiúsculos e minúsculos com numeros e especiais.') }}
     </x-slot>
 
     <x-slot name="form">
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="current_password" value="{{ __('Passoword Actual') }}" />
+            <x-label for="current_password" value="{{ __('Password Actual') }}" />
             <x-input id="current_password" type="password" class="mt-1 block w-full" wire:model="state.current_password" autocomplete="current-password" />
             <x-input-error for="current_password" class="mt-2" />
         </div>

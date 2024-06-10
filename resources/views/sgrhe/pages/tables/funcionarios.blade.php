@@ -148,12 +148,19 @@
                                                         @method('PUT')
                                                         <button type="submit" class="btn btn-warning w-100 m-1">Editar</button>
                                                       </form>
+                                                      @if (2 === 1 || 6 >= 4 )
                                                       <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $funcionario->id_funcionario }}">
                                                           @csrf
                                                           @method('DELETE')
                                                           <input type="hidden" name="id" value="{{ $funcionario->id_funcionario }}">
                                                           <input type="hidden" name="categoria" value="Funcionario">
                                                           <button type="submit" class="btn btn-danger w-100 m-1" onclick="confirmAndSubmit(event, 'Confirmar deletar  Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
+                                                      </form>
+                                                      @endif
+                                                      <form action="{{ route('formulario.avaliar.funcionario') }}" method="GET" style="display: inline;">
+                                                        @csrf
+                                                        <input type="hidden" name="idFuncionario" value="{{ $funcionario->id }}">
+                                                        <button type="submit" class="btn btn-primary w-100 m-1">Avaliar Desenpenho</button>
                                                       </form>
                                                       <form action="{{ route('estado.funcionario') }}" method="POST" id="deleteForm{{ $funcionario->id_funcionario }}">
                                                           @csrf

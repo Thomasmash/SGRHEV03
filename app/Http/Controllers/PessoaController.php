@@ -57,7 +57,7 @@ class PessoaController extends Controller
             ]);
 
         $pessoa = Pessoa::create([
-            'nomeCompleto' => $request->input('nomeCompleto'),
+            'nomeCompleto' => mb_strtoupper($request->input('nomeCompleto')),
             'dataNascimento' => $request->input('dataNascimento'),
             'genero'=> $request->input('genero'),
             'grupoSanguineo' => $request->input('grupoSanguineo'),

@@ -1,28 +1,28 @@
 <x-action-section>
     <x-slot name="title">
-        {{ __('Autenticação de dois fatores') }}
+        {{ __('Autenticação em dois factores') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Adicione segurança adicional à sua conta usando a autenticação de dois fatores.') }}
+        {{ __('Adicione segurança adicional à sua conta usando a autenticação em dois factores.') }}
     </x-slot>
 
     <x-slot name="content">
         <h3 class="text-lg font-medium text-gray-900">
             @if ($this->enabled)
                 @if ($showingConfirmation)
-                    {{ __('Conclua a habilitação da autenticação de dois fatores.') }}
+                    {{ __('Conclua a habilitação da autenticação em dois factores.') }}
                 @else
-                    {{ __('Você habilitou a autenticação de dois fatores.') }}
+                    {{ __('Você habilitou a autenticação em dois factores.') }}
                 @endif
             @else
-                {{ __('Você não habilitou a autenticação de dois fatores.') }}
+                {{ __('Você não habilitou a autenticação em dois factores.') }}
             @endif
         </h3>
 
         <div class="mt-3 max-w-xl text-sm text-gray-600">
             <p>
-                {{ __('Quando a autenticação de dois fatores estiver habilitada, você será solicitado a fornecer um token aleatório seguro durante a autenticação. Você pode recuperar este token do seu smartphone com Google Authenticator aplicativo.') }}
+                {{ __('Quando a autenticação em dois factores estiver habilitada, você será solicitado a fornecer um token aleatório seguro durante a autenticação. Você pode recuperar este token do seu smartphone com Google Authenticator aplicativo.') }}
             </p>
         </div>
 
@@ -31,9 +31,9 @@
                 <div class="mt-4 max-w-xl text-sm text-gray-600">
                     <p class="font-semibold">
                         @if ($showingConfirmation)
-                            {{ __('Para terminar de ativar a autenticação de dois fatores, digitalize o seguinte código QR usando o aplicativo autenticador do seu telefone ou digite a chave de configuração e forneça o código OTP gerado.') }}
+                            {{ __('Para terminar de ativar a autenticação em dois factores, digitalize o seguinte código QR usando o aplicativo autenticador do seu telefone ou digite a chave de configuração e forneça o código OTP gerado.') }}
                         @else
-                            {{ __('A autenticação de dois fatores agora está habilitada. Digitalize o seguinte código QR usando o aplicativo autenticador do seu telefone ou digite a chave de configuração.') }}
+                            {{ __('A autenticação em dois factores agora está habilitada. Digitalize o seguinte código QR usando o aplicativo autenticador do seu telefone ou digite a chave de configuração.') }}
                         @endif
                     </p>
                 </div>

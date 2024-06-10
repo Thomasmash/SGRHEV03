@@ -66,9 +66,7 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                         color: red;
                         position: relative;
                         padding:1.5;
-                        margin: 1.5cm 0cm .5cm 0cm;
                         font-weight: bold;
-                        margin: 3px;
                 }
                 .corpo {
                         text-align: justify;
@@ -169,10 +167,11 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                         <p>Guia de Colocação </p>
                         <br>
                         <p style="text-align: left;">#{{ $idProcesso }}/{{ date('Y') }}DME-PÚRI</p>
+                        <br>
                 </div>
                 <div class="corpo">
                         <p>
-                        Por esta Direcção Municipal, se faz constar as autoridades a quem p conhencimento desta competir que segue viagem para a {{ $unidadeOrganicaOndeVai->designacao }}, O Senhor <span style="font-weight: bold;">{{ $pessoa->nomeCompleto }}</span>, agente nº <span style="font-weight: bold;">{{ $funcionario->numeroAgente }} </span>, com a categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }} , a fim de exercer as suas funções na mesma.
+                        Por esta Direcção Municipal, se faz constar as autoridades a quem o conhencimento desta competir que segue viagem para a {{ $unidadeOrganicaOndeVai->designacao }}, O Senhor <span style="font-weight: bold;">{{ $pessoa->nomeCompleto }}</span>, agente nº <span style="font-weight: bold;">{{ $funcionario->numeroAgente }} </span>, com a categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }} , a fim de exercer as suas funções na mesma.
                         </p>
                         <div class="preenchimento">
                        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # ###  
@@ -182,7 +181,7 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                                E, para que se lhe não ponha inpedimento, passou-se a senguinte GUIA que por min vai assinada e autenticada com carimbo à óleo em uso nesta Direcção Municipal.
                         </p>
                         <p>
-                               Obs: Após a recepção da guia o Professor devera apresentar'se num prazo de 48 horas na instituição onde foi colocado.
+                               Obs: Após a recepção da guia o Professor devera apresentar-se num prazo de 48 horas na instituição onde foi colocado.
                         </p>
                 </div>
                 <div class="data-local">
