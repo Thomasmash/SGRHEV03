@@ -128,7 +128,7 @@ class FuncionarioController extends Controller
           $titulo = "Funcionários / Força de Trabalho";
           return view('sgrhe/pages/tables/funcionarios',compact('dados','titulo'));
     }
-   
+   /*
     public function indexFuncionariosInativos()
     {
           //Operacoes de join para varias tabelas relacionadas com funcionarios
@@ -142,12 +142,12 @@ class FuncionarioController extends Controller
               join seccaos on seccaos.id=funcionarios.idSeccao
               join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica
               join cargos on cargos.id=funcionarios.idCargo 
-            where funcionarios.estado = "Inactivo"
+            where funcionarios.estado = "Inactiv"
           ');
-          $titulo = "Funcionários em estado Inactivo";
+          $titulo = "Funcionários em estado";
           return view('sgrhe/pages/tables/funcionarios',compact('dados','titulo'));
     }
-
+*/
   
 //Create
     public function store(Request $request) {
@@ -270,7 +270,8 @@ class FuncionarioController extends Controller
            //Verificar se o Cargo de Director da Escla esta Elegivel
            $cargoSubmetido = Cargo::find($request->idCargo);
            if ($cargoSubmetido->codNome === "DirectorEscola") {
-                $funcionario = Funcionario::where('idUnidadeOrganica', $request->idUnidadeOrganica)->where('idCargo', 4)->exists();
+               // dd($cargoSubmetido->codNome);
+                $funcionario = Funcionario::where('idUnidadeOrganica', $request->idUnidadeOrganica)->where('idCargo', 5)->exists();
                 if ($funcionario) {
                     return redirect()->back()->with('error', 'O Cargo à Director para essa Escola não se encontra Disponível ');
                 }else{

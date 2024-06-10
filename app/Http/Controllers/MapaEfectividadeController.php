@@ -51,7 +51,7 @@ class MapaEfectividadeController extends Controller
         $request->validate([
             'estado' => ['sometimes', 'string', function ($attribute, $value, $fail) {
                 if ($value !== 'Activo') {
-                    $fail('Não é possivel adicionar o funcionário que não está activo! Possivelmente está em dispensa ou inactivo.');
+                    $fail('Não é possivel adicionar o funcionário que não está activo! Possivelmente está em dispensa ou em estado não activo.');
                 }
             }]
         ]);

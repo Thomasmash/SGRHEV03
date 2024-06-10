@@ -28,7 +28,7 @@ class ProcessoController extends Controller
             //Converetr o Request String Em Request Array
             parse_str($D, $Request);
             $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;
-            dd($nomeFuncionario); 
+            //dd($nomeFuncionario); 
             $Documento = $request->file('arquivo');
             //Nomear o Nome do Novo ficheiro PDF
             $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;

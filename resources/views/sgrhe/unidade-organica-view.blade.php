@@ -115,7 +115,7 @@
                         </form> 
                       </div>
                     </div>
-                    <!-- Unidades Organicas -->
+                    <!--Alunos-->
                       <div class="col-lg-3 col-6 {{ ($unidadeOrganicaSelected->nivelEnsino === 'Não Definido, ') ? 'd-none' : ''}}">
                         <div class="small-box bg-info">
                           <div class="inner">
@@ -128,8 +128,8 @@
                           <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                       </div>
-                    <!-- /Unidades Organicas -->
-                    <!-- Escolas Primárias -->
+                    <!--/Alunos-->
+                    <!--Alunos Femininos-->
                       <div class="col-lg-3 col-6 {{ ($unidadeOrganicaSelected->nivelEnsino === 'Não Definido, ') ? 'd-none' : ''}}">
                         <div class="small-box bg-success">
                           <div class="inner">
@@ -142,8 +142,8 @@
                           <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                       </div>
-                    <!-- /Escolas Primárias -->
-                    <!--Funcionarios Inactivos-->
+                    <!--/Alunos Feminino-->
+                    <!--Alunos Masculinos-->
                       <div class="col-lg-3 col-6">
                         <!-- small box -->
                         <div class="small-box bg-danger">
@@ -157,7 +157,7 @@
                           <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                       </div>
-                    <!--Funcionarios Inactivos-->
+                    <!--/Alunos Masculinos-->
                   </div>
                   <!-- /.row -->
                   <!-- Main row -->
