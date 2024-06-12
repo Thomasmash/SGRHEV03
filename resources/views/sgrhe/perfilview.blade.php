@@ -1,3 +1,8 @@
+@php
+  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+  $permissoes = session()->only(['Cargo'])['Cargo']->permissoes;
+  $seccao = session()->only(['Seccao'])['Seccao']->codNome;
+@endphp
 <!--Layout Principal-->
 @extends('layouts.app')
   @section('titulo' , 'Perfil - '.$pessoa->nomeCompleto )
