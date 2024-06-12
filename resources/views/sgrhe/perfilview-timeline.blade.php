@@ -1,5 +1,6 @@
 @php
   setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+  $permissoes = session()->only(['Cargo'])['Cargo']->permissoes;
 @endphp
 <!--Layout Principal-->
 @extends('layouts.app')
@@ -180,6 +181,7 @@
                                   <!--tab-pane-->
                                    <div class="tab-pane" id="Solicitar">
                                         <!-- CardContet -->
+                                        @if ( !($permissoes === "Admin") || ($permissoes >= 4 && $seccao === "RHPE"))
                                             <!--Solicitar Item-->
                                               <div class="col-8 offset-md-2">
                                                     <div class="card  card-outline card-info">
@@ -249,8 +251,7 @@
                                                 </div>
                                               <!-- Modal Solicitar Licenca -->
                                             <!--Solicitar Item-->
-
-
+                                          @endif
 
                                             <!--Solicitar Item-->
                                               <div class="col-8 offset-md-2">

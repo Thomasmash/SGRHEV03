@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
  session(['idUnidadeOrganica' => App\Models\UnidadeOrganica::where('id', App\Models\Funcionario::where('id', $idFuncionario)->first()->idUnidadeOrganica)->first()->id]);
  ?>
 @php
-  $permissoes = $seccaoLogado->permissoes;
+  $permissoes = session()->only(['Cargo'])['Cargo']->permissoes;
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
