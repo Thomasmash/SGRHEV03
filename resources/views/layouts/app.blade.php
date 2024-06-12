@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
  session(['idUnidadeOrganica' => App\Models\UnidadeOrganica::where('id', App\Models\Funcionario::where('id', $idFuncionario)->first()->idUnidadeOrganica)->first()->id]);
  ?>
 @php
+  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
   $permissoes = session()->only(['Cargo'])['Cargo']->permissoes;
 @endphp
 <!DOCTYPE html>

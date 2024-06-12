@@ -316,6 +316,7 @@ class ProcessoController extends Controller
     //Solicitar Processos Genericos 
     public function solicitar(Request $request)
     { 
+        //dd($request->all());
         
         if (($request->categoria=="GozoFerias") && (isset($request->dataInicio))) {
             $request->validate([
