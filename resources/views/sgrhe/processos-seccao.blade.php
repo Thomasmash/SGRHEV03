@@ -3,7 +3,7 @@
 @endphp
 <!--Layout Principal-->
 @extends('layouts.app')
-  @section('titulo' , 'Processos da Seção de  - '.session()->only(['Seccao'])['Seccao']->designacao )
+  @section('titulo' , 'Processos da Seção de  - '.$seccaoLogado->designacao )
         @section('header')
         
              <!--Estilizacao do Previw foto de Perfil-->
@@ -45,7 +45,7 @@
               <div class="container-fluid">
                 <div class="row mb-2">
                   <div class="col-sm-6">
-                    <h1> Processos da Secção - {{ session()->only(['Seccao'])['Seccao']->designacao }}</h1>
+                    <h1> Processos da Secção - {{ $seccaoLogado->designacao }}</h1>
                   </div>
                   <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -83,7 +83,7 @@
                                             <div class="timeline-item">
                                               <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
 
-                                              <h3 class="timeline-header border-0"><a href="#">{{$pessoa->nomeCompleto}}</a>, aqui econtras os processos submetidos relacionados com a secção de {{ session()->only(['Seccao'])['Seccao']->codNome }}! 
+                                              <h3 class="timeline-header border-0"><a href="#">{{$pessoa->nomeCompleto}}</a>, aqui econtras os processos submetidos relacionados com a secção de {{ $seccaoLogado->codNome }}! 
                                               </h3>
                                             </div>
                                           </div>

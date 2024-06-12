@@ -1,7 +1,7 @@
 @php
   setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
-  $permissoes = session()->only(['Cargo'])['Cargo']->permissoes;
-  $seccao = session()->only(['Seccao'])['Seccao']->codNome;
+  $permissoes = $cargoLogado->permissoes;
+  $seccao = $seccaoLogado->codNome;
 @endphp
 <!--Layout Principal //23121997-->
 @extends('layouts.app')

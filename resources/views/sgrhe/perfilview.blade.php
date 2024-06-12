@@ -235,7 +235,7 @@
                                                  
                                                           </div>
                                                           <div id="item-bi" class="info-toggle">
-                                                            @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                            @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                               <!--BTN Modal de Add Arquivo -->
                                                                 <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addBI" data-form-action="{{ route('arquivos.store',['idFuncionario' => $funcionario->id, 'categoria' => 'BI', 'idPessoa' => $funcionario->idPessoa ]) }}">
                                                                   <i class="fa fa-plus"></i>  Actualizar Bilhete De Identidade
@@ -254,7 +254,7 @@
                                                           <p class="text-danger">Não Actualizado</p>                                                         
                                                           </div>
                                                           <div id="item-bi" class="info-toggle">
-                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                          @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addBI" data-form-action="{{ route('arquivos.store',['idFuncionario' => $funcionario->id, 'categoria' => 'BI',  'idPessoa' => $funcionario->idPessoa ]) }}">
                                                                   <i class="fa fa-plus "></i> Adicionar Bilhete De Identidade
@@ -349,7 +349,7 @@
                                                  
                                                           </div>
                                                           <div id="item-CM" class="info-toggle">
-                                                            @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                            @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                               <!--BTN Modal de Add Arquivo -->
                                                                 <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addCM" data-form-action="{{ route('arquivos.store',['idFuncionario' => $funcionario->id, 'categoria' => 'BI', 'idPessoa' => $funcionario->idPessoa ]) }}">
                                                                   <i class="fa fa-plus"></i>  Actualizar Cartão de Munícipe
@@ -368,7 +368,7 @@
                                                           <p class="text-danger">Não Actualizado</p>                                                         
                                                           </div>
                                                           <div id="item-CM" class="info-toggle">
-                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                          @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addCM" data-form-action="{{ route('arquivos.store.cm',['idFuncionario' => $funcionario->id, 'categoria' => 'CM',  'idPessoa' => $funcionario->idPessoa ]) }}">
                                                                   <i class="fa fa-plus "></i> Adicionar Cartão de Munícipe
@@ -500,7 +500,7 @@
                                                             <p class="atrubutos-intem-funcionario">Nota Final <span class="text-muted">{{ $documento['notaFinal'] }} </span></p>                                                         
                                                           </div>
                                                           <div id="item-Habilitacoes" class="info-toggle">
-                                                            @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                            @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addHabilitacoes" data-form-action="{{ route('inserir.documento') }} " >
                                                               <i class="fa fa-plus"></i>Actualizar Habilitações
@@ -518,7 +518,7 @@
                                                             <p class="text-danger">Não Actualizado</p>
                                                           </div>
                                                           <div id="item-Habilitacoes" class="info-toggle">
-                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                          @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addHabilitacoes" data-form-action="{{ route('inserir.documento') }}">
                                                                   <i class="fa fa-plus"></i> Actualizar Habilitações Literais
@@ -627,7 +627,7 @@
                                                             <p class="atrubutos-intem-funcionario">Data de Início de Funções: <span class="text-muted">{{ $documento['dataInicioFuncoes'] }} </span></p>                                                          
                                                           </div>
                                                           <div id="item-TermoInicioFuncoes" class="info-toggle">
-                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                          @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addTermoInicioFuncoes" data-form-action="{{ route('inserir.documento') }} " >
                                                                <i class="fa fa-plus"></i>  Actualizar Termo de Início de Funcões
@@ -645,7 +645,7 @@
                                                             <p class="text-danger">Não Actualizado</p>
                                                           </div>
                                                           <div id="item-TermoInicioFuncoes" class="info-toggle">
-                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                          @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addTermoInicioFuncoes" data-form-action="{{ route('inserir.documento') }}">
                                                                   <i class="fa fa-plus"></i> Actualizar Termo de Início de Funcões
@@ -724,7 +724,7 @@
                                                             <p class="atrubutos-intem-funcionario">Para Unidade Orgânica: <span class="text-muted">{{ $unidadeOrganica['designacao'] }} </span></p>                                                         
                                                           </div>
                                                           <div id="item-GuiaColocacao" class="info-toggle">
-                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                          @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addGuiaColoaccao" data-form-action="{{ route('inserir.documento') }} " >
                                                               <i class="fa fa-plus"></i>  Actualizar Guia de Colocação
@@ -742,7 +742,7 @@
                                                             <p class="text-danger">Não Actualizado</p>
                                                           </div>
                                                           <div id="item-GuiaColocacao" class="info-toggle">
-                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                          @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addGuiaColoaccao" data-form-action="{{ route('inserir.documento') }}">
                                                                   <i class="fa fa-plus"></i> Actualizar Guia de Colocação
@@ -833,7 +833,7 @@
                                                             <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{ \Carbon\Carbon::parse($documento['dataCriacao'])->format('d/m/Y')  }} </span></p>                                                          
                                                           </div>
                                                           <div id="item-Autobiografia" class="info-toggle">
-                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                          @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addAutobiografia" data-form-action="{{ route('inserir.documento') }} " >
                                                               <i class="fa fa-plus"></i> Actualizar Autobiografia
@@ -851,7 +851,7 @@
                                                             <p class="text-danger">Não Actualizado</p>
                                                           </div>
                                                           <div id="item-Autobiografia" class="info-toggle">
-                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                          @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addAutobiografia" data-form-action="{{ route('inserir.documento') }}">
                                                                   <i class="fa fa-plus"></i> Actualizar Autobiografia
@@ -929,7 +929,7 @@
                                                             <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{  \Carbon\Carbon::parse($documento['dataCriacao'])->format('d/m/Y') }} </span></p>                                                          
                                                           </div>
                                                           <div id="item-CurriculumVitae" class="info-toggle">
-                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                          @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addCurriculumVitae" data-form-action="{{ route('inserir.documento') }} " >
                                                                 <i class="fa fa-plus"></i>  Actualizar CurriculumVitae
@@ -947,7 +947,7 @@
                                                             <p class="text-danger">Não Actualizado</p>
                                                           </div>
                                                           <div id="item-CurriculumVitae" class="info-toggle">
-                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                          @if ( $cargoLogado->permissoes === 'Admin' || $seccaoLogado->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addCurriculumVitae" data-form-action="{{ route('inserir.documento') }}">
                                                                   <i class="fa fa-plus"></i> Actualizar CurriculumVitae

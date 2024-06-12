@@ -154,13 +154,14 @@
                                       <label for="tel">Telefone</label>
                                       <input type="text" name="numeroTelefone" class="form-control" id="tel" value="{{ old('numeroTelefone',$funcionario->numeroTelefone ?? '') }}" placeholder="+244 92 000 000" >
                                   </div>
-                                    
+                                  <br>
                                   <div class="form-group mb-0">
                                       <div class="custom-control custom-checkbox">
                                         <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1" required>
-                                        <label class="custom-control-label" for="exampleCheck1">Concordar em Submeter os dados do Funcionario nos termos<a href="#"> Termos de Regulamento Interno da Direção Municipal da Educação do Púri</a>.</label>
+                                        <label class="custom-control-label" for="exampleCheck1">Concordar em Submeter os dados do Funcionario nos termos do <a href="{{ route('regulamento') }}"> Regulamento Interno da Direção Municipal da Educação do Púri</a>.</label>
                                       </div>
                                   </div>
+                                  <br>
                                   <button type="submit" class="btn btn-primary" style="width: 100%;">{{isset($funcionario) ? 'Actualizar':'Cadastrar'}}</button> 
                                   </form>
                                 </div>

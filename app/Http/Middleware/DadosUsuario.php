@@ -2,8 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Cargo;
 use App\Models\Funcionario;
 use App\Models\Pessoa;
+use App\Models\Seccao;
+use App\Models\UnidadeOrganica;
 use Closure;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
@@ -20,23 +23,20 @@ class DadosUsuario
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            $funcionario = Funcionario::where('numeroAgente', Auth::user()->numeroAgente)->first();
-            if ($funcionario == null) {
-                return $next($request);
-            }
-            session(['funcionario' => $funcionario]);
-            $pessoa = Pessoa::where('id', $funcionario->idPessoa )->first();
+            $numeroAgente = Auth::user()->numeroAgente;
+            $funcionario = Funcionario::where('numeroAgente', $numeroAgente)->first();
             view()->share([
-                'funcionarioLog' => $funcionario,
-                'pessoaLog' => $pessoa,
+                'funcionarioLogado' => $funcionario,
+                'pessoaLogado' => Pessoa::where('id', $funcionario->idPessoa )->first(),
+                'cargoLogado' => Cargo::where('id', $funcionario->idCargo )->first(),
+                'seccaoLogado' => Seccao::where('id', $funcionario->idSeccao )->first(),
+                'unidadeOrganicaLogado' => UnidadeOrganica::where('id', $funcionario->idUnidadeOrganica )->first(),
+                'numeroAgente' => $numeroAgente,
             ]);
         }else {
          //   dd('Nao Logado Lote ao Midleware Dados Usuario para Configuarar um alerta de usuario nao logado implementado no Layout Guest');
         }
         return $next($request);
-       
-       
-     
     }
 }
 

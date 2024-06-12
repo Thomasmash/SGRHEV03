@@ -1,5 +1,5 @@
 @php
-  $permissoes = session()->only(['Cargo'])['Cargo']->permissoes;
+  $permissoes = $cargoLogado->permissoes;
 @endphp
 <div class="sidebar">
       <!-- SidebarSearch Form 
@@ -25,7 +25,7 @@
                                 <div class="image">
                                       <!--Verificador e renderizador de foto de Perfil-->  
                                       @php
-                                        $fotodeperfil = App\Models\Arquivo::where('idFuncionario',$funcionarioLog->id)->where('categoria','FotoPerfil')->first();
+                                        $fotodeperfil = App\Models\Arquivo::where('idFuncionario',$funcionarioLogado->id)->where('categoria','FotoPerfil')->first();
                                         //echo($fotodeperfil);
                                       @endphp
                                       @if ($fotodeperfil )            
@@ -42,12 +42,12 @@
                                       @endif
                                               
                                 </div>
-                                <a href="{{ route('perfil.show', ['idFuncionario' => $funcionarioLog->id]) }}" class="d-block">
+                                <a href="{{ route('perfil.show', ['idFuncionario' => $funcionarioLogado->id]) }}" class="d-block">
                                   <div class="text-center ">
                                     <div style="width:100%;" class="info elemento" id="elemento">
-                                      <p style="font-weight: bolder;">{{ session()->only(['Cargo'])['Cargo']->designacao }}</p> <!--.' de(a) '.session()->only(['Seccao'])['Seccao']->designacao -->
-                                      <p>({{ session()->only(['Seccao'])['Seccao']->codNome }})</p>
-                                      <p>Olá {{ explode(" ", $pessoaLog->nomeCompleto)[0] }}!</p>
+                                      <p style="font-weight: bolder;">{{ $cargoLogado->designacao }}</p> <!--.' de(a) '.$seccaoLogado->designacao -->
+                                      <p>({{ $seccaoLogado->codNome }})</p>
+                                      <p>Olá {{ explode(" ", $pessoaLogado->nomeCompleto)[0] }}!</p>
                                       
                                       <p>Seja bem vindo(a)!</p>
                                     </div>
@@ -58,7 +58,7 @@
                                
                                 
                           <li class="nav-item">
-                                <a href="{{ route('timeline.show', ['idFuncionario' => $funcionarioLog->id]) }}"  class="nav-link {{ request()->routeIs('timeline.show') ? 'active' : ''}}">
+                                <a href="{{ route('timeline.show', ['idFuncionario' => $funcionarioLogado->id]) }}"  class="nav-link {{ request()->routeIs('timeline.show') ? 'active' : ''}}">
                                 <i class="bi bi-calendar2-range"></i>  
                                 <p class="item-1">
                                     Linha de Tempo
@@ -85,7 +85,7 @@
                                               </a>
                                             </li>
                                             <li class="nav-item">
-                                              <a href="{{ route('processos.seccao', ['seccao' => session()->only(['Seccao'])['Seccao']->codNome ] ) }}" class="nav-link ">
+                                              <a href="{{ route('processos.seccao', ['seccao' => $seccaoLogado->codNome ] ) }}" class="nav-link ">
                                                 <p class="item-2">
                                                 <i class="bi bi-grid"></i>
                                                   Processos da Secção
@@ -122,7 +122,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                               <li class="nav-item">
-                                <a href="{{ route('perfil.show', ['idFuncionario' => $funcionarioLog->id]) }}"  class="nav-link {{ request()->routeIs('perfil.show') ? 'active' : ''}}">
+                                <a href="{{ route('perfil.show', ['idFuncionario' => $funcionarioLogado->id]) }}"  class="nav-link {{ request()->routeIs('perfil.show') ? 'active' : ''}}">
                                   <p class="item-2">
                                    <i class="bi bi-person-vcard-fill"></i>
                                     Perfil
@@ -182,7 +182,7 @@
                           </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <a href="{{ route('fichas.avaliacao.funcionario', ['idFuncionario' => $funcionarioLog->id ]) }}"  class="nav-link {{ request()->routeIs('fichas.avaliacao.funcionario') ? 'active' : ''}}">
+                              <a href="{{ route('fichas.avaliacao.funcionario', ['idFuncionario' => $funcionarioLogado->id ]) }}"  class="nav-link {{ request()->routeIs('fichas.avaliacao.funcionario') ? 'active' : ''}}">
                                 <p class="item-2">
                                 <i class="bi bi-calendar2-range"></i>
                                 Fichas de Avaliação
@@ -426,6 +426,14 @@
 
                           </ul>
                         </li>
+                        <li class="nav-item">
+                                <a href="{{ route('regulamento') }}"  class="nav-link {{ request()->routeIs('regulamento') ? 'active' : ''}}">
+                                <i class="bi bi-calendar2-range"></i>  
+                                <p class="item-1">
+                                    Regulamento Interno DME
+                                  </p>
+                                </a>
+                          </li>
                       <!--/.Serviços-->
                     
             </li>

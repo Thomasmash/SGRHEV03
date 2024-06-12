@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ArquivoController extends Controller
 {
+    /*
 
     public function homologar(Request $request)
     {
@@ -77,12 +78,12 @@ class ArquivoController extends Controller
     return redirect()->back()->with('error', 'Erros ao Actualizar!');//Aplicar Rediret with erro end success  
     }
   
-
+*/
 
   
   public function fotoPerfilActualizar(Request $request)
     {  
-//Não precisa de validacao pois já foi tratado previamente pelo js no Coped IMG
+    //Não precisa de validacao pois já foi tratado previamente pelo js no Coped IMG
       $imageData = $request->input('croppedImage');
       //Converter do formato base64 para o formato binario se for imagem
       if ($imageData) {
@@ -117,9 +118,6 @@ class ArquivoController extends Controller
       return redirect()->back()->with('error', 'Erro ao actualizar foto de perfil!');//Aplicar Rediret with erro end success  
   }
   
-
-
-
 
 
          /* Armazenar Bilhete de Identidade
@@ -303,10 +301,6 @@ class ArquivoController extends Controller
 
 
 
-
-
-
-
      /* Exibir e Renderizar Qualquer Umagem
      */
     public function exibirImagem($imagem)
@@ -326,7 +320,7 @@ class ArquivoController extends Controller
         return response()->make($arquivo,200,['Content-Type' => $mimetype]);
     }
 
-         /*  Exibir e Renderizar Qualquer Documento pdf, jpg e npg
+         /*  Exibir e Renderizar Qualquer Documento pdf, jpg e npg pelo caminho
      */
     public function exibirArquivo($imagem)
     { 

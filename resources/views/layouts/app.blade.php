@@ -1,9 +1,14 @@
 <?php
 use Illuminate\Support\Facades\Auth;
+//Lhe por onde so e passada uma vez por seccao
+
+
  //Carregar dados de perfil de Usuário Logado no Sistema 
+ 
+ session(['funcionario' => App\Models\Funcionario::where('numeroAgente', Auth::user()->numeroAgente)->first()]);
  session(['idFuncionario' => App\Models\Funcionario::where('numeroAgente', Auth::user()->numeroAgente)->first()->id]);
  session(['numeroAgente' => Auth::user()->numeroAgente]);
- $idFuncionario = session()->only(['idFuncionario']);
+  $idFuncionario = session()->only(['idFuncionario']);
  session(['idCargo' => App\Models\Cargo::where('id', App\Models\Funcionario::where('id', $idFuncionario)->first()->idCargo)->first()->id]);
  session(['Cargo' => App\Models\Cargo::where('id', App\Models\Funcionario::where('id', $idFuncionario)->first()->idCargo)->first()]);
  session(['Seccao' => App\Models\Seccao::where('id', App\Models\Funcionario::where('id', $idFuncionario)->first()->idSeccao)->first()]);
@@ -14,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
  session(['idUnidadeOrganica' => App\Models\UnidadeOrganica::where('id', App\Models\Funcionario::where('id', $idFuncionario)->first()->idUnidadeOrganica)->first()->id]);
  ?>
 @php
-  $permissoes = session()->only(['Cargo'])['Cargo']->permissoes;
+  $permissoes = $seccaoLogado->permissoes;
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">

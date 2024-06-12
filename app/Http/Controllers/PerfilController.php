@@ -13,8 +13,6 @@ use App\Models\Pessoa;
 use App\Models\Processo;
 use App\Models\Seccao;
 use App\Models\UnidadeOrganica;
-
-
 use Illuminate\Http\Request;
 
 class PerfilController extends Controller

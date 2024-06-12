@@ -20,6 +20,7 @@ use App\Http\Controllers\UnidadeOrganicaDadosController;
 use App\Models\Arquivo;
 use App\Models\AvaliacaoDesempenhoFuncionario;
 use App\Models\Cargo;
+use App\Models\Funcionario;
 use App\Models\Habilitacao;
 use App\Models\UnidadeOrganica;
 use App\Models\UnidadeOrganicaDado;
@@ -73,6 +74,7 @@ Route::middleware([
 // Rotas Protegidas pelo MiddleWar(Sanctum) 
 //Dashboard Invoque
 Route::get('/dashboard',[DashboardController::class,'index'])->name('inicio');
+Route::get('/regulamento-interno/dme/puri',[FuncionarioController::class,'regulamento'])->name('regulamento');
 
 Route::redirect('/welcome',function(){
     return header('Location/');

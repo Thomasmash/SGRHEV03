@@ -174,7 +174,7 @@ $dataF= new DateTime($Request['dataFim']);
                 <div class="autenticacao" style="position:relative; text-align:center;" >
                 <!--Importar a Imagem de assinatura do Funionario e posteriomente aolicar mecanismos de assinatura digital com verifcacao com codigo QR-->
                         @php
-                               $assinatura =  App\Models\Assinatura::where('idFuncionario', session()->only(['funcionario'])['funcionario']->id)->first();
+                               $assinatura =  App\Models\Assinatura::where('idFuncionario', $funcionarioLogado->id)->first();
                         @endphp
                         @if (!$assinatura==null)
                        <div style="position:absolute; width:100%; z-index:1; ">

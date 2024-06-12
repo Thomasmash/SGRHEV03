@@ -113,10 +113,6 @@ class ProcessoController extends Controller
                 }
                 return redirect()->back()->with('success', 'Parecer aplicado com sucesso!');
             }
-        
-        
-        
-       
     }
 
     public function parecer(Request $request)
@@ -421,7 +417,7 @@ class ProcessoController extends Controller
     //Listar os Processo de uma determinada Secao
     public function processosSeccao(string $seccao)
     {
-        $idFuncionario = session()->only(['idFuncionario']);
+        $idFuncionario = session()->only(['funcionario'])['funcionario']->id;
         $processos = Processo::orderBy('created_at', 'desc')->where('seccao', $seccao)->get();
         $funcionario = Funcionario::where('id',$idFuncionario)->first();
         $pessoa = Pessoa::where('id',$funcionario->idPessoa)->first();

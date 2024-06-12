@@ -121,7 +121,7 @@
 
 
                           <div class="card-footer">
-                          <a href="{{route('pessoas.form')}}" class="btn btn-primary d-block"> Cadastrar Entidade Pessoa</a>
+                          <a href="{{route('pessoas.form')}}" class="btn btn-primary d-block"> Cadastrar Pessoa</a>
                           </div>
                         <!-- /.card-body -->
                       </div>
