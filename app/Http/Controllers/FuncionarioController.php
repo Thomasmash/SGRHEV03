@@ -283,12 +283,18 @@ class FuncionarioController extends Controller
     }
     //Update
     public function update(Request $request, string $id)
-    {   
-         //dd($request->all());
-           //Verificar se o Cargo de Director da Escla esta Elegivel
-           $cargo = Cargo::find($request->idCargo);
-           $seccao = Seccao ::find($request->idSeccao);
-           //dd($cargo);
+    {       
+           // dd($request->all());
+            $cargo = Cargo::find($request->idCargo);
+            $seccao = Seccao ::find($request->idSeccao);
+            //dd($cargo->permissoes);
+            //Se o Update for para Funcionarios como: Directores Chefes de Seccao e Director Municipal Requerem Despachos de Nomeação
+            
+            if ( ($cargo->permissoes >= 3) && !($cargo->permissoes == 4) ){
+                // Criar um método para submissao de transferencia 
+                return redirect()->route('funcionarios.nomeacao', ['numeroAgente' => $request->numeroAgente,'idUnidadeOrganica' => $request->idUnidadeOrganica,'motivo' => 'SN','categoria' => 'Nomeacao','natureza' => 'Despacho', 'idCargo' => $cargo->id]);
+            }
+           // Verificar se o Cargo de Director da Escla esta Elegivel
            if ($cargo->codNome === "DirectorEscola") {
                // dd($cargoSubmetido->codNome);
                 $funcionario = Funcionario::where('idUnidadeOrganica', $request->idUnidadeOrganica)->where('idCargo', 5)->exists();

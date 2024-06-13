@@ -164,7 +164,7 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
         <div class="corpo">
                 <div class="titulo ">
                         <br>
-                        <p>Solicitação de Transferência </p>
+                        <p>Despacho de Nomeação </p>
                         <br>
                         <p style="text-align: left;">#{{ $idProcesso }}/{{ date('Y') }}DME-PÚRI</p>
                         <br>

@@ -8,6 +8,7 @@ use App\Models\CategoriaFuncionario;
 use App\Models\Funcionario;
 use App\Models\Pessoa;
 use App\Models\Processo;
+use App\Models\Seccao;
 use App\Models\UnidadeOrganica;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -27,11 +28,11 @@ class ProcessoController extends Controller
             $D = $request->Request;
             //Converetr o Request String Em Request Array
             parse_str($D, $Request);
-            $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;
+            $nomeFuncionario = Pessoa::find($funcionario->idPessoa)->nomeCompleto;
             //dd($nomeFuncionario); 
             $Documento = $request->file('arquivo');
             //Nomear o Nome do Novo ficheiro PDF
-            $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;
+            $nomeFuncionario = Pessoa::find($funcionario->idPessoa)->nomeCompleto;
             $fileName = $nomeFuncionario.'-'.date('dmYHis').'.pdf';
             $caminho = 'sgrhe/funcionarios/'.$Request['idFuncionarioSolicitante'].'/'.$Request['categoria'].'/'.$fileName;
             //dd($Documento);
@@ -139,7 +140,7 @@ class ProcessoController extends Controller
         //Renderizar a View
         $Documento->render();
         //Nomear o Nome do Novo ficheiro PDF
-        $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;
+        $nomeFuncionario = Pessoa::find($funcionario->idPessoa)->nomeCompleto;
         $fileName = $nomeFuncionario.'-'.$categoria.date('dmYHis').'.pdf';
         //Retornar o Domunento Gerado 
        // return response($Documento->output(), 200, ['Content-Type' => 'application/pdf', 'Content-Disposition' => 'inline; filename="'.$fileName.'"']);
@@ -212,7 +213,7 @@ class ProcessoController extends Controller
         //Renderizar a View
         $Documento->render();
         //Nomear o Nome do Novo ficheiro PDF
-        $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;
+        $nomeFuncionario = Pessoa::find($funcionario->idPessoa)->nomeCompleto;
         $fileName = $nomeFuncionario.'-'.$categoria.date('dmYHis').'.pdf';
         //Retornar o Domunento Gerado 
        // return response($Documento->output(), 200, ['Content-Type' => 'application/pdf', 'Content-Disposition' => 'inline; filename="'.$fileName.'"']);
@@ -284,13 +285,14 @@ class ProcessoController extends Controller
         $categoriaFuncionario = categoriaFuncionario::where('id', $funcionario->idCategoriaFuncionario)->first();
         $unidadeOrganica = UnidadeOrganica::where('id', $funcionario->idUnidadeOrganica)->first();
         
+
         $idProcesso = $request['idProcesso'];
         //Carregar a View
         $Documento = PDF::loadView("sgrhe/modelos/$categoria",compact('unidadeOrganicaOndeVai','Request','pessoa','funcionario','cargo','categoriaFuncionario','unidadeOrganica','idProcesso'));      
         //Renderizar a View
         $Documento->render();
         //Nomear o Nome do Novo ficheiro PDF
-        $nomeFuncionario = Pessoa::find($Request['idFuncionarioSolicitante'])->nomeCompleto;
+        $nomeFuncionario = Pessoa::find($funcionario->idPessoa)->nomeCompleto;
         $fileName = $nomeFuncionario.'-'.$categoria.'.pdf';
         //Retornar o Domunento Gerado 
        // return view("sgrhe/modelos/$categoria",compact('Request','pessoa','funcionario','cargo','categoriaFuncionario'));
@@ -312,8 +314,7 @@ class ProcessoController extends Controller
     //Solicitar Processos Genericos 
     public function solicitar(Request $request)
     { 
-        //dd($request->all());
-        
+       // dd($request->all());
         if (($request->categoria=="GozoFerias") && (isset($request->dataInicio))) {
             $request->validate([
                 'dataInicio' => ['required', 'date', 'after_or_equal:today'],
@@ -359,6 +360,48 @@ class ProcessoController extends Controller
          return redirect()->back()->with('error', 'Erro de aplicação');   
     }
 
+
+        public function nomeacao($numeroAgente, $idUnidadeOrganica, $motivo, $categoria, $natureza, $idCargo){
+            //dd($numeroAgente,$idUnidadeOrganica,$motivo,$categoria,$natureza,$idCargo);
+            $funcionario = Funcionario :: where('numeroAgente', $numeroAgente)->first();
+            //dd($funcionario);
+            $Request = [ 
+                'idFuncionarioSolicitante' => $funcionario->id,
+                'numeroAgente' => $numeroAgente,
+                'idUnidadeOrganica' => $idUnidadeOrganica,
+                'motivo' => $motivo,
+                'categoria' => $categoria,
+                'natureza' => $natureza,
+                'idCargo' => $idCargo
+            ];
+            //dd($funcionario);
+            //Verificar se ja existe um processo de Despacho de Nomeação para o mesmo funcionario
+            $nomeacao = Processo::where('natureza', 'Despacho')->where('categoria', 'Transferencia')->where('idFuncionarioSolicitante', $funcionario->id)->exists();
+            if (!$nomeacao) {
+            $processo = Processo::create([
+                // Recupera o id do funcionario logado pela sessao 
+                'idFuncionario' => session()->only(['funcionario'])['funcionario']->id,
+                'idFuncionarioSolicitante' => $funcionario->id,
+                'seccao' => 'RHPE',
+                'categoria' => $categoria,
+                'natureza' => $natureza,
+                'estado' => 'Submetido',
+                //'deferimento' => $request->input('deferimento'),
+                //Dados do Request Arasenados em string no campo Request
+                'Request' => http_build_query($Request) //implode(', ', $request->all()),
+                //Anexos, Dependencias Tipo Documentos e Outras Imformacoes para se efectivar um determinado processo 
+            ]);
+            DB::beginTransaction();
+            if ($processo) {
+                DB::commit();
+                return redirect()->back()->with('success', 'Nomeacão  aplicada com Sucesso!');     
+            }
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Erro de aplicação'); 
+        }else {
+            return redirect()->back()->with('error', 'O Funcionário já tem uma Despacho de Nomeação pendente!'); 
+        }
+    }
 
 
 /*

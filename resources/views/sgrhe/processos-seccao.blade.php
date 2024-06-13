@@ -123,7 +123,7 @@
                                                     <input type="hidden" name="idProcesso" value="{{$processo->id}}">
                                                     <button type="submit" class="btn btn-info">Ver Documento</button>
                                                   </form>
-                                                  @if($processo->categoria === "Transferencia")
+                                                  @if(($processo->categoria === "Transferencia") && !($processo->natureza == 'Despacho'))
                                                     <form class="{{ ($processo->estado == 'Submetido') ? 'd-inline' : 'd-none'}}"  action="{{ route('solicitacao.preview')}}" method="POST" >
                                                       @csrf
                                                       @method('POST')
@@ -143,7 +143,7 @@
                                                     <input type="hidden" name="idProcesso" value="{{$processo->id}}">
                                                     <button type="submit" class="btn btn-warning" onclick="confirmAndSubmit(event, 'Aprovar a  solicitacao de Licença?', 'Sim, Aprovar!', 'Não, Cancelar Aprovação!')">Aprovar Solicitação</button>
                                                   </form>
-                                                  <button type="button" class="btn btn-primary {{ ($processo->parecer == 'Favoravel' || $processo->parecer == 'Desfavoravel' || $processo->estado == 'Cancelado' || $processo->estado == 'Aprovado' || $processo->estado == 'Desfavoravel') ? 'd-none' : ' '}} {{ ( $processo->natureza == 'Requerimento') ? ' ' : 'd-none'}}" data-toggle="modal" data-target="#parecer{{ $processo->id}}">
+                                                  <button type="button" class="btn btn-primary {{ ($processo->parecer == 'Favoravel' || $processo->parecer == 'Desfavoravel' || $processo->estado == 'Cancelado' || $processo->estado == 'Aprovado' || $processo->estado == 'Desfavoravel') ? 'd-none' : ' '}} {{ (($processo->natureza == 'Requerimento') || ($processo->natureza == 'Despacho')) ? ' ' : 'd-none'}}" data-toggle="modal" data-target="#parecer{{ $processo->id}}">
                                                          Dar Parecer
                                                   </button>
 

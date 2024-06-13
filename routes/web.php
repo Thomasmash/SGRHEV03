@@ -143,6 +143,11 @@ Route::any('/index-funcionarios/inativos',[FuncionarioController::class,'index']
 //Usando Formulário Selectivo por Tipologias de Funcionários
 Route::any('/funcionarios',[FuncionarioController::class,'indexFuncionarios'])->name('funcionarios');
 
+
+// Nomeação de Funcionários quando um funcionário e promovido ou movimnetado sem Previa solisitacao por parte do fucnionario
+Route::any('/funcionarios/{numeroAgente}/{idUnidadeOrganica}/{motivo}/{categoria}/{natureza}/{idCargo}/',[ProcessoController::class,'nomeacao'])->name('funcionarios.nomeacao');
+
+
 Route::any('/index-funcionarios',[FuncionarioController::class,'indexFuncionariosInativos'])->name('funcionarios.index.inativos');//->middleware('AcessoAdmin');
 //Actualizar um Registro da Entidade Funcionario
 Route::any('/updade-funcionario{id}',[FuncionarioController::class,'update'])->name('funcionarios.update');//->middleware('AcessoAdmin');

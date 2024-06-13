@@ -1,6 +1,6 @@
 @php
   setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
-  $permissoes = session()->only(['Cargo'])['Cargo']->permissoes;
+  $permissoes = $cargoLogado->permissoes;
   $seccao = session()->only(['Seccao'])['Seccao']->codNome;
 @endphp
 <!--Layout Principal-->
@@ -127,7 +127,7 @@
                                                 </div>
                                                 <div class="timeline-footer">  
 
-                                                  <form class="{{ ($processom->estado == 'Submetido') ? 'd-inline' : 'd-none'}}" action="{{ route('solicitacao.cancelar', ['idProcesso' => $processom->id ]) }}" method="POST" id="deleteForm{{ $processom->id }}">
+                                                  <form class="{{ (($processom->estado == 'Submetido') && !($processom->categoria == 'Nomeacao')) ? 'd-inline' : 'd-none'}}" action="{{ route('solicitacao.cancelar', ['idProcesso' => $processom->id ]) }}" method="POST" id="deleteForm{{ $processom->id }}">
                                                     @csrf
                                                     @method('POST')
                                                     <input type="hidden" name="Request"  value="{{$processom->Request}}">
@@ -182,7 +182,7 @@
                                   <!--tab-pane-->
                                    <div class="tab-pane" id="Solicitar">
                                         <!-- CardContet -->
-                                        @if ( !($permissoes === "Admin") || ($permissoes >= 4 && $seccao === "RHPE"))
+                                        @if ( ($permissoes < 3 ) || ($permissoes == 4) )
                                             <!--Solicitar Item-->
                                               <div class="col-8 offset-md-2">
                                                     <div class="card  card-outline card-info">

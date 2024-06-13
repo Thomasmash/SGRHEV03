@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Auth;
 
 
  //Carregar dados de perfil de Usuário Logado no Sistema 
- 
+ /*
  session(['funcionario' => App\Models\Funcionario::where('numeroAgente', Auth::user()->numeroAgente)->first()]);
- session(['idFuncionario' => App\Models\Funcionario::where('numeroAgente', Auth::user()->numeroAgente)->first()->id]);
  session(['numeroAgente' => Auth::user()->numeroAgente]);
   $idFuncionario = session()->only(['idFuncionario']);
  session(['idCargo' => App\Models\Cargo::where('id', App\Models\Funcionario::where('id', $idFuncionario)->first()->idCargo)->first()->id]);
@@ -17,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
  session(['fotoPerfil' => isset(App\Models\Arquivo::where('idFuncionario', $idFuncionario)->where('categoria','FotoPerfil')->first()->caminho) ? App\Models\Arquivo::where('idFuncionario',$idFuncionario)->where('categoria','FotoPerfil')->first()->caminho : "null"]);
 // dd(session()->only(['fotoPerfil'])['fotoPerfil']);
  session(['idUnidadeOrganica' => App\Models\UnidadeOrganica::where('id', App\Models\Funcionario::where('id', $idFuncionario)->first()->idUnidadeOrganica)->first()->id]);
+ */
  ?>
 @php
   $permissoes = session()->only(['Cargo'])['Cargo']->permissoes;
