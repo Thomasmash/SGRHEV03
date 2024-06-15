@@ -151,7 +151,7 @@
                                                   <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                       <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Requerimento de {{ $pessoaSolicitante->nomeCompleto }}</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">{{ $processo->natureza == 'Despacho' ? 'Despacho de Nomeação de ' : 'Requerimento de' }}{{ $pessoaSolicitante->nomeCompleto }}</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                           <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -201,7 +201,7 @@
                                                     // echo($documento->first()->caminho);    
                                                     @endphp 
                                                   @if ($documento->exists()) 
-                                                    <a href="{{ route('Exibir.Imagem', ['imagem' => base64_encode( $documento->first()->caminho )]) }}" class="btn btn-secondary {{ ($processo->estado == 'Aprovado' || $processo->estado == 'Desfavoravel' || $processo->estado == 'Favoravel') ? 'd-inline' : 'd-none'}} ">Baixar Documento</a>
+                                                    <a href="{{ route('Exibir.Imagem', ['imagem' => base64_encode( $documento->first()->caminho )]) }}" class="btn btn-secondary {{ (($processo->estado == 'Aprovado') || ($processo->estado == 'Desfavoravel') || ($processo->estado == 'Favoravel')) ? 'd-inline' : 'd-none'}} ">Baixar Documento</a>
                                                   @endif
                                                 </div>
                                               </div>

@@ -211,6 +211,8 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                 </div>
         </div>
         <div class="rodape">
+        <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find($funcionarioProcessador->idPessoa)->first()->nomeCompleto }}, {{ App\Models\Processo::find($idProcesso)->first()->updated_at}}.</p>
+        <br>
                 <div class="foot-esquerda">
                         <p>Direcção Municipal do Púri</p>
                         <p>Rua A</p>

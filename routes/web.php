@@ -147,6 +147,9 @@ Route::any('/funcionarios',[FuncionarioController::class,'indexFuncionarios'])->
 // Nomeação de Funcionários quando um funcionário e promovido ou movimnetado sem Previa solisitacao por parte do fucnionario
 Route::any('/funcionarios/{numeroAgente}/{idUnidadeOrganica}/{motivo}/{categoria}/{natureza}/{idCargo}/',[ProcessoController::class,'nomeacao'])->name('funcionarios.nomeacao');
 
+// Nomeação de Funcionário 
+Route::any('/update/funcionario/{dados}',[ProcessoController::class,'updateFuncionario'])->name('update.funcionario');
+
 
 Route::any('/index-funcionarios',[FuncionarioController::class,'indexFuncionariosInativos'])->name('funcionarios.index.inativos');//->middleware('AcessoAdmin');
 //Actualizar um Registro da Entidade Funcionario

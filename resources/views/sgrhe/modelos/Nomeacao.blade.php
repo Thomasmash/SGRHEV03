@@ -164,28 +164,25 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
         <div class="corpo">
                 <div class="titulo ">
                         <br>
-                        <p>Despacho de Nomeação </p>
+                        <p>Proposta de Nomeação</p>
                         <br>
-                        <p style="text-align: left;">#{{ $idProcesso }}/{{ date('Y') }}DME-PÚRI</p>
+                        <p style="text-align: left;">#{{ App\Models\Processo::where('categoria', $categoriaProcesso)->count() }}/{{ date('Y').' '}}DME-PÚRI</p>
                         <br>
                 </div>
                 <div class="corpo">
                         <p>
-                        ALFREDO JOSÉ MÁRIO Director Municipal da Educaçcão, declaro por minha honra profissional que o senhor {{ $pessoa->nomeCompleto }}, solteiro de {{ $pessoa->dataNascimento }} anos de idade, filho de  {{ $parente->nomePai }}, e de {{ $parente->nomeMae }}, nascido aos {{ $pessoa->dataNascimento }}, natural de {{ $naturalidade->municipio }}, Município de  {{ $naturalidade->municipio }}, Província de {{ $naturalidade->provincia }}, portador do B.I. nº {{ $pessoa->numeroBI }}, passado pelo Sector de Identificação de Uíge aos 28 de Abril de {{ date('Y')}}
+                        <span style="font-weight: bold;">{{ $pessoa->nomeCompleto }}</span> solteir{{ ($pessoa->genero == 'Femenino') ? 'a' : 'o' }} de {{ date('Y')-strftime('%Y', strtotime(\Carbon\Carbon::parse($pessoa->dataNascimento))) }} anos de idade, filho de  {{ $parente->nomePai }}, e de {{ $parente->nomeMae }}, nascido aos {{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse($pessoa->dataNascimento))) }}, natural de {{ $naturalidade->municipio }}, Município de  {{ $naturalidade->municipio }}, Província de {{ $naturalidade->provincia }}, portador do B.I. nº {{ $pessoa->numeroBI }}, passado pelo Sector de Identificação de Uíge aos 28 de Abril de {{ date('Y')}}.
                         </p>
                         <p>
-                                É {{ $cargo->designacao }}, convertido na categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }}, salario base de {{ $categoriaFuncionario->salariobase }} com o número de agente {{ $funcionario->numeroAgente }} colocado na Unidade Organica, {{ $unidadeOrganica->designacao }} 
-                        </p>
-                        <p>
-                                {{ $Request['motivo'] }}
+                                É <span style="font-weight: bold;">{{ $cargo->designacao }}</span>, desde {{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse($funcionario->dataAdmissao))) }}  convertido na Categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }}, com o número de Agente <span style="font-weight: bold;">{{ $funcionario->numeroAgente }}</span> colocado na Unidade Organica, <span style="font-weight: bold;">{{ $unidadeOrganica->designacao }}</span>.
                         </p>
                         <div class="preenchimento">
-                       # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # ###  
+                       = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =  
                         </div>
-                    
                         <p>
-                               Venho por Este meio Solicitar a Transferencia ...... 
+                         É Proposto para exercer o cargo de <span style="font-weight: bold;"> {{ $cargoOndeVai->designacao }} </span> na <span style="font-weight: bold;">{{ $unidadeOrganicaOndeVai->designacao }}</span>.
                         </p>
+
                 </div>
                 <div class="data-local">
                         <?php
@@ -205,14 +202,16 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                                 </div>
                        @endif
                        <div style="position:absolute; z-index:2; width:100%;">
-                        <p style="font-weight: bold;">O Director Municipal</p>
+                        <p style="font-weight: bold;">O Solicitante</p>
                                 <p style="margin: 0; padding:0;">____________________________</p>
-                                <p style="margin: 0; padding:0;">Afredo José Mário</p>
+                                <p style="margin: 0; padding:0;">{{ $pessoa->nomeCompleto }}</p>
                        </div>
 
                 </div>
         </div>
         <div class="rodape">
+                <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find($funcionarioProcessador->idPessoa)->first()->nomeCompleto }}, {{ App\Models\Processo::find($idProcesso)->first()->updated_at}}.</p>
+                <br>
                 <div class="foot-esquerda">
                         <p>Direcção Municipal do Púri</p>
                         <p>Rua A</p>

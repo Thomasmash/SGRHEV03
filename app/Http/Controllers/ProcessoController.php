@@ -12,6 +12,7 @@ use App\Models\Seccao;
 use App\Models\UnidadeOrganica;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -22,49 +23,44 @@ class ProcessoController extends Controller
 
     public function darParecer(Request $request)
     {
-       //dd($request->all());
-    
+        // dd($request->all());
+        //Salvar Aquivo
+        $D = $request->Request;
+        //Converetr o Request String Em Request Array
+        parse_str($D, $Request);
+        //dd($Request);
+        $funcionarioSolicitante = Funcionario::find($Request['idFuncionarioSolicitante'])->first();
+        //dd($nomeFuncionario); 
+        $Documento = $request->file('arquivo');
+        //Nomear o Nome do Novo ficheiro PDF
+        $nomeFuncionario = Pessoa::find($funcionarioSolicitante->idPessoa)->first()->nomeCompleto;
+        $fileName = $nomeFuncionario.'-'.date('dmYHis').'.pdf';
+        $caminho = 'sgrhe/funcionarios/'.$Request['idFuncionarioSolicitante'].'/'.$Request['categoria'].'/'.$fileName;
+        //dd($Documento);
+        // Armazenar o arquivo no subdiretório dentro da pasta 'local Especifico'
+        $save = Storage::disk('local')->put($caminho, file_get_contents($Documento));
+        // DB::beginTransaction();
+        $Arquivo = Arquivo::create([
+            'titulo' => md5($fileName),
+            'categoria' => $Request['categoria'],
+            'descricao' => http_build_query($Request),
+            'arquivo' => $fileName,
+            'caminho' => $caminho,
+            'idFuncionario' => $Request['idFuncionarioSolicitante'],
+        ]);
         if ($request->parecer === 'Favoravel') {
-            $D = $request->Request;
-            //Converetr o Request String Em Request Array
-            parse_str($D, $Request);
-            $nomeFuncionario = Pessoa::find($funcionario->idPessoa)->nomeCompleto;
-            //dd($nomeFuncionario); 
-            $Documento = $request->file('arquivo');
-            //Nomear o Nome do Novo ficheiro PDF
-            $nomeFuncionario = Pessoa::find($funcionario->idPessoa)->nomeCompleto;
-            $fileName = $nomeFuncionario.'-'.date('dmYHis').'.pdf';
-            $caminho = 'sgrhe/funcionarios/'.$Request['idFuncionarioSolicitante'].'/'.$Request['categoria'].'/'.$fileName;
-            //dd($Documento);
-            // Armazenar o arquivo no subdiretório dentro da pasta 'local Especifico'
-            $save = Storage::disk('local')->put($caminho, file_get_contents($Documento));
-            DB::beginTransaction();
-            $Arquivo = Arquivo::create([
-                'titulo' => md5($fileName),
-                'categoria' => $Request['categoria'],
-                'descricao' => http_build_query($Request),
-                'arquivo' => $fileName,
-                'caminho' => $caminho,
-                'idFuncionario' => $Request['idFuncionarioSolicitante'],
-            ]);
             if ($Arquivo) {
                 $idArquivo = Arquivo::where('idFuncionario', $Request['idFuncionarioSolicitante'])->where('categoria', $Request['categoria'] )->latest()->first()->id;
-
                 $Processo = Processo::where('id', $request['idProcesso'])->first();
                 //dd($Processo);
                 if ($save) {
-                    $estado = $request->input('parecer');
-                    if ($request->input('parecer') == 'Favoravel') {
-                        $estado = 'Aprovado';
-                    } 
-                    $Processo->update([
-                        'idArquivo' => $idArquivo,
-                        'ratificador' => session()->only(['funcionario'])['funcionario']->id,
-                        'estado' => $estado,
-                        'deferimento' => $request->input('parecer'),
-                        
-                    ]);
-                    //Se Categoria for Transferencia Efectivara a Mudanca nesta Sec
+                    $idArquivo = Arquivo::where('idFuncionario', $Request['idFuncionarioSolicitante'])->where('categoria', $Request['categoria'] )->latest()->first()->id;
+                    $Processo = Processo::where('id', $request['idProcesso'])->first();
+                    $Processo->idArquivo = $idArquivo;
+                    $Processo->ratificador = session()->only(['funcionario'])['funcionario']->id;
+                    $Processo->estado = "Aprovado";
+                    $Processo->deferimento = $request->input('parecer');
+                    //Se Categoria for Transferencia ou Nomeacao ou Edicao Efectivara a Mudanca nesta Sec
                     if ($Request['categoria']=="Transferencia") {
                         $funcionario = Funcionario::find($Request['idFuncionarioSolicitante']);
                        // dd($funcionario);
@@ -75,6 +71,23 @@ class ProcessoController extends Controller
                             //Rebaixado para cargo de Professor cujo o id Cargo e 3
                             $funcionario->idCargo = 3;
                         }
+                        $funcionario->save();   
+                    }
+
+                    if ($Request['categoria']=="Nomeacao") {
+                        //Efectivar as Mudancas para o Funcionário  //23121997
+                        //DB::beginTransaction();
+                        //Isolar ou identificar o Registro a Ser Alterado
+                        $funcionario = Funcionario::where('id', $Request['idFuncionarioSolicitante'])->first();
+                        //Iniciar actualização
+                        $funcionario->numeroAgente = $Request['numeroAgente'];
+                        $funcionario->idCategoriaFuncionario =  $Request['idCategoriaFuncionario'];
+                        $funcionario->idCargo =  $Request['idCargo'];
+                        $funcionario->idSeccao =  $Request['idSeccao'];
+                        $funcionario->idUnidadeOrganica =  $Request['idUnidadeOrganica'];
+                        $funcionario->iban =  $Request['iban'];
+                        $funcionario->dataAdmissao =  $Request['dataAdmissao'];
+                        $funcionario->numeroTelefone =  $Request['numeroTelefone'];
                         $funcionario->save();
                     }
                     
@@ -82,40 +95,40 @@ class ProcessoController extends Controller
                     if ($Request['categoria']=="Lecenca") {
                       dd('Licenca');
                     }
-                    
-                    DB::commit();
-                    return redirect()->back()->with('success', 'Ratificado com sucesso!');
-                }
-            DB::rollBack();
-            return redirect()->back()->with('error', 'Erro ao Salvar o registro!');
-            }
-            DB::rollBack();
-            return redirect()->back()->with('error', 'Erro ao Ratificar!');
 
-            }else{
-                DB::commit();
-                $Processo = Processo::where('id', $request['idProcesso'])->first();
-                //dd($Processo);
-                if ($Processo) {
-                    $estado = $request->input('parecer');
-                    if ($request->input('parecer') == 'Desfavoralvel') {
-                        $estado = 'Não Aprovado';
-                    }else {
-                        $Processo->update([
-                            'ratificador' => session()->only(['funcionario'])['funcionario']->id,
-                            'estado' => $estado,
-                            'deferimento' => $request->input('parecer'),
-                            
-                        ]);
-                        DB::commit();
+                    if ($Processo->save()) {
                         return redirect()->back()->with('success', 'Parecer aplicado com sucesso!');
-                    }
-                   
+                    } 
+                }else {
+                    //DB::rollBack();
+            return redirect()->back()->with('error', 'Erro ao Salvar o Arquivo!');
                 }
-                return redirect()->back()->with('success', 'Parecer aplicado com sucesso!');
+            }else {
+                //DB::rollBack();
+                return redirect()->back()->with('error', 'Arquivo com formato inválido!');
             }
+            
+        }else{
+            if ($Arquivo) {
+                if ($save) {
+                    $idArquivo = Arquivo::where('idFuncionario', $Request['idFuncionarioSolicitante'])->where('categoria', $Request['categoria'] )->latest()->first()->id;
+                    $Processo = Processo::where('id', $request['idProcesso'])->first();
+                    $Processo->idArquivo = $idArquivo;
+                    $Processo->ratificador = session()->only(['funcionario'])['funcionario']->id;
+                    $Processo->estado = 'Desfavoravel';
+                    $Processo->deferimento = $request->input('parecer');
+                    if ($Processo->save()) {
+                        return redirect()->back()->with('success', 'Parecer aplicado com sucesso!');
+                    }  
+                }else {
+                    //DB::rollBack();
+            return redirect()->back()->with('error', 'Erro ao Salvar o Arquivo!');
+                }
+            }
+        }
     }
 
+    /*
     public function parecer(Request $request)
     {
        dd($request->all());
@@ -186,14 +199,16 @@ class ProcessoController extends Controller
     
         //Registro o Processo no Bango de dados e Salvamento do Arquivo Gerado no Banco de Dados 
     }
-
+*/
 
 
     /**
      * Display a listing of the resource.
      */
+
     public function ratificar(Request $request)
     {
+        dd($request->all());
         //Compilando o Documento Ratificado
         //Reconversao do Submit do ormularo armazenado no banco de dados
         $D = $request->Request;
@@ -272,23 +287,31 @@ class ProcessoController extends Controller
         if (isset($request->imprimir)) {
             $categoria = $request->imprimir;
         }
-        //Verificar se nao é uma guia de Transferencia
-        if($Request['categoria'] === "Transferencia"){
-            $unidadeOrganicaOndeVai = UnidadeOrganica::where('id', $Request['idUnidadeOrganica'])->first();
-        }else{
-            $unidadeOrganicaOndeVai = "";
-        }
+
         //dd($unidadeOrganicaOndeVai) //23121997;
+        $funcionarioProcessador = Funcionario::where('numeroAgente',  Auth::user()->numeroAgente)->first();
         $funcionario = Funcionario::where('id', $Request['idFuncionarioSolicitante'])->first();
         $pessoa = Pessoa::where('id', $funcionario->idPessoa)->first();
         $cargo =  Cargo::where('id', $funcionario->idCargo)->first();
         $categoriaFuncionario = categoriaFuncionario::where('id', $funcionario->idCategoriaFuncionario)->first();
         $unidadeOrganica = UnidadeOrganica::where('id', $funcionario->idUnidadeOrganica)->first();
-        
+        $categoriaProcesso = $Request['categoria'];
 
         $idProcesso = $request['idProcesso'];
+        //Verificar se nao é uma guia de Transferencia
+        if(($Request['categoria'] === "Transferencia") || ($Request['categoria'] === "Nomeacao")){
+        $unidadeOrganicaOndeVai = UnidadeOrganica::where('id', $Request['idUnidadeOrganica'])->first();
+        }else{
+        $unidadeOrganicaOndeVai = "";
+        }
+        //Verificar se não é uma 
+        if (($Request['categoria'] === "Nomeacao")) {
+            $cargoOndeVai =  Cargo::where('id', $Request['idCargo'])->first();
+        }else {
+            $cargoOndeVai = "";
+        }
         //Carregar a View
-        $Documento = PDF::loadView("sgrhe/modelos/$categoria",compact('unidadeOrganicaOndeVai','Request','pessoa','funcionario','cargo','categoriaFuncionario','unidadeOrganica','idProcesso'));      
+        $Documento = PDF::loadView("sgrhe/modelos/$categoria",compact('unidadeOrganicaOndeVai','cargoOndeVai','Request','pessoa','funcionario','funcionarioProcessador','cargo','categoriaFuncionario','unidadeOrganica','idProcesso','categoriaProcesso'));      
         //Renderizar a View
         $Documento->render();
         //Nomear o Nome do Novo ficheiro PDF
@@ -360,48 +383,40 @@ class ProcessoController extends Controller
          return redirect()->back()->with('error', 'Erro de aplicação');   
     }
 
-
-        public function nomeacao($numeroAgente, $idUnidadeOrganica, $motivo, $categoria, $natureza, $idCargo){
-            //dd($numeroAgente,$idUnidadeOrganica,$motivo,$categoria,$natureza,$idCargo);
-            $funcionario = Funcionario :: where('numeroAgente', $numeroAgente)->first();
-            //dd($funcionario);
-            $Request = [ 
-                'idFuncionarioSolicitante' => $funcionario->id,
-                'numeroAgente' => $numeroAgente,
-                'idUnidadeOrganica' => $idUnidadeOrganica,
-                'motivo' => $motivo,
-                'categoria' => $categoria,
-                'natureza' => $natureza,
-                'idCargo' => $idCargo
-            ];
-            //dd($funcionario);
-            //Verificar se ja existe um processo de Despacho de Nomeação para o mesmo funcionario
-            $nomeacao = Processo::where('natureza', 'Despacho')->where('categoria', 'Transferencia')->where('idFuncionarioSolicitante', $funcionario->id)->exists();
-            if (!$nomeacao) {
-            $processo = Processo::create([
-                // Recupera o id do funcionario logado pela sessao 
-                'idFuncionario' => session()->only(['funcionario'])['funcionario']->id,
-                'idFuncionarioSolicitante' => $funcionario->id,
-                'seccao' => 'RHPE',
-                'categoria' => $categoria,
-                'natureza' => $natureza,
-                'estado' => 'Submetido',
-                //'deferimento' => $request->input('deferimento'),
-                //Dados do Request Arasenados em string no campo Request
-                'Request' => http_build_query($Request) //implode(', ', $request->all()),
-                //Anexos, Dependencias Tipo Documentos e Outras Imformacoes para se efectivar um determinado processo 
-            ]);
-            DB::beginTransaction();
-            if ($processo) {
-                DB::commit();
-                return redirect()->back()->with('success', 'Nomeacão  aplicada com Sucesso!');     
+        public function updateFuncionario(string $dados)
+        {
+                //Repor o array
+                parse_str($dados, $Request);
+                //dd($Request);
+                $funcionario = Funcionario :: where('numeroAgente', $Request['numeroAgente'])->first();
+                //Verificar se ja existe um processo de Despacho de Nomeação para o mesmo funcionario
+                $nomeacao = Processo::where('natureza', $Request['natureza'])->where('categoria', $Request['categoria'])->where('estado', "Submetido")->where('idFuncionarioSolicitante', $funcionario->id)->exists();
+                if (!$nomeacao) {
+                $processo = Processo::create([
+                    // Recupera o id do funcionario logado pela sessao 
+                    'idFuncionario' => session()->only(['funcionario'])['funcionario']->id,
+                    'idFuncionarioSolicitante' => $funcionario->id,
+                    'seccao' => 'RHPE',
+                    'categoria' => $Request['categoria'],
+                    'natureza' => $Request['natureza'],
+                    'estado' => 'Submetido',
+                    //'deferimento' => $request->input('deferimento'),
+                    //Dados do Request Armasenados em string no campo Request
+                    'Request' => http_build_query($Request) //implode(', ', $request->all()),
+                    //Anexos, Dependencias Tipo Documentos e Outras Imformacoes para se efectivar um determinado processo 
+                ]);
+                DB::beginTransaction();
+                if ($processo) {
+                    DB::commit();
+                    return redirect()->back()->with('success', 'Nomeacão  aplicada com Sucesso!');     
+                }
+                DB::rollBack();
+                return redirect()->back()->with('error', 'Erro de aplicação'); 
+            }else {
+                return redirect()->back()->with('error', 'O Funcionário '.Pessoa::find($funcionario->idPessoa)->nomecompleto.', já tem um Despacho de Nomeação pendente!'); 
             }
-            DB::rollBack();
-            return redirect()->back()->with('error', 'Erro de aplicação'); 
-        }else {
-            return redirect()->back()->with('error', 'O Funcionário já tem uma Despacho de Nomeação pendente!'); 
         }
-    }
+
 
 
 /*

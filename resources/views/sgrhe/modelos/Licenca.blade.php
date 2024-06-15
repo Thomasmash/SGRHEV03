@@ -158,7 +158,8 @@ $dataF= new DateTime($Request['dataFim']);
                         <br>
                         <p>Licença</p>
                         <br>
-                        <p style="text-align: left;">#{{ $idProcesso }}/{{ date('Y') }}DME-PÚRI</p>
+                        <p style="text-align: left;">#{{ App\Models\Processo::where('categoria', $categoriaProcesso)->count() }}/{{ date('Y').' '}}DME-PÚRI</p>
+                        <br>
                 </div>
                 <div class="introducao">
                         {{$pessoa->nomeCompleto}}, funcionári(a) desta Direcção, vem por meio deste, solicitar ao Senhor Director Municipal da Educação do Púri, se digne dispensá-lo num período de {{ ($dataI->diff($dataF))->format('%a') }} dias úteis, a partir de {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($dataI))) }} à  {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($dataF))) }}, {{ $Request['motivo']}}
@@ -192,6 +193,8 @@ $dataF= new DateTime($Request['dataFim']);
                 </div>
         </div>
         <div class="rodape">
+        <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find($funcionarioProcessador->idPessoa)->first()->nomeCompleto }}, {{ App\Models\Processo::find($idProcesso)->first()->updated_at}}.</p>
+        <br>
                 <div class="foot-esquerda">
                         <p>Direcção Municipal do Púri</p>
                         <p>Rua A</p>

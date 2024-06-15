@@ -166,7 +166,7 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                         <br>
                         <p>Guia de Colocação </p>
                         <br>
-                        <p style="text-align: left;">#{{ $idProcesso }}/{{ date('Y') }}DME-PÚRI</p>
+                        <p style="text-align: left;">#{{ App\Models\Processo::where('categoria', $categoriaProcesso)->count() }}/{{ date('Y').' '}}DME-PÚRI</p>
                         <br>
                 </div>
                 <div class="corpo">
@@ -210,6 +210,8 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                 </div>
         </div>
         <div class="rodape">
+        <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find($funcionarioProcessador->idPessoa)->first()->nomeCompleto }}, {{ App\Models\Processo::find($idProcesso)->first()->updated_at}}.</p>
+        <br>
                 <div class="foot-esquerda">
                         <p>Direcção Municipal do Púri</p>
                         <p>Rua A</p>

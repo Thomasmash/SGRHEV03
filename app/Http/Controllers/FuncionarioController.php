@@ -281,8 +281,96 @@ class FuncionarioController extends Controller
     }
         
     }
+
+      //Update
+      public function update(Request $request, string $id)
+      {  
+          
+        if (false) {  
+            DB::beginTransaction();
+            //Isolar ou identificar o Registro a Ser Alterado
+            $funcionario = Funcionario::where('id', $id)->first();
+            //Iniciar actualização
+            $funcionario->numeroAgente = $request->numeroAgente;
+            $funcionario->idCategoriaFuncionario = $request->idCategoriaFuncionario;
+            $funcionario->idCargo = $request->idCargo;
+            $funcionario->idSeccao = $request->idSeccao;
+            $funcionario->idUnidadeOrganica = $request->idUnidadeOrganica;
+            $funcionario->iban = $request->iban;
+            $funcionario->email = $request->email;
+            $funcionario->dataAdmissao = $request->dataAdmissao;
+            $funcionario->numeroTelefone = $request->numeroTelefone;
+
+              if ($funcionario->save()) {
+                  DB::commit();
+                  return redirect()->back()->with('success', 'Registro atualizado com sucesso.');
+              }else {
+                  DB::rollBack();
+                  return redirect()->back()->with('error', 'Erro de Acualização nda Entidade Funionário! ')->withErrors($request);
+              }
+           }  
+           //$dados=$request->all();
+           // dd($dados);
+           $request->validate([
+                  'idCargo' => [
+                      Rule::unique('funcionarios')->where( function($query) {
+                          $query->where('idCargo', 8);
+                      })->ignore($request->idCargo),
+                  ],
+              'numeroAgente' => ['numeric','required','unique:funcionarios,numeroAgente,'.$id],
+              'dataAdmissao' => ['date','required','before_or_equal:now'],
+              'iban' => ['string','required','unique:funcionarios,iban,'.$id], 
+              'email' => ['email','max:255','nullable','unique:funcionarios,email,'.$id],
+              'numeroTelefone' => ['between:9,14','unique:funcionarios,numeroTelefone,'.$id],    
+              ], [
+                  'idCargo.unique' => 'O Cargo de Director Muninipal não está Disponível!',
+                  'numeroAgente.unique' => 'O Número de agente ja está sendo utilizado por outro usuário!',
+                  'numeroAgente.required' => 'O Número de Agente é Obrigatório!',
+                  'numeroAgente.numeric' => 'O Número de Agente deve ser um numero!',
+                  'dataAdmissao.before_or_equal' => 'A data de Admissão deve ser antes do dia de Hoje!', 
+                  'dataAdmissao.required' => 'A data de Admissão é Obrigatória!',
+                  'iba.unique' => 'O Iban ja está sendo utilizado por outro usuário!',
+                  'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro usuário!', 
+              ]);
+              $dados =$request->all();
+              $dados['categoria'] = 'Nomeacao';
+              $dados['natureza'] = 'Despacho';
+              $dados['idFuncionarioSolicitante'] = $id;
+              $natureza = 'Despacho';
+              $cargoDirectorEscola = false;
+              $cargoChefeSeccao = false;
+              //Verificações da natureza da nomeação
+              $cargo = Cargo::find($request->idCargo);
+              $seccao= Seccao ::find($request->idSeccao);
+             
+              //Verificar se é Nomeaçao de Cargo de Director de Escola
+              if ( $cargo->codNome === "DirectorEscola" ) {
+                   // Verificar de o cargo de Director para uma deternminaa Escola está disponivel
+                   $verificarCargoDirectorEscola= Funcionario::where('idUnidadeOrganica', $request->idUnidadeOrganica)->where('idCargo', 5)->exists();
+                   if ($verificarCargoDirectorEscola) {
+                   return redirect()->back()->with('error', 'O Cargo à Director para essa Escola não se encontra Disponível ');
+               }else {
+                $cargoDirectorEscola=true;
+               }
+              }
+              //Verificar se é Nomeação de Cargo de Chefe de Secção
+              if ( $cargo->codNome === "ChefeSeccao" ) {
+                    // Verificar de o cargo de Chefe de Secção está disponivel
+                    $verificarChefeSeccao = Funcionario::where('idcargo', $cargo->id)->where('idSeccao', $seccao->id)->exists();
+                    if ($verificarChefeSeccao) {
+                    return redirect()->back()->with('error', 'O Cargo de Chefia para a Secção de '.$seccao->designacao.' não se encontra disponível! ');
+                }else {
+                    $cargoChefeSeccao=true;
+                }
+              }
+            $dados =  http_build_query($dados);
+            return redirect()->route('update.funcionario', ['dados' => $dados]);
+            //return redirect()->route('funcionarios.nomeacao', ['numeroAgente' => $request->numeroAgente,'idUnidadeOrganica' => $request->idUnidadeOrganica,'motivo' => 'SN','categoria' => 'Nomeacao','natureza' => 'Despacho', 'idCargo' => $cargo->id]);
+    }
+             
+
     //Update
-    public function update(Request $request, string $id)
+    public function updatea(Request $request, string $id)
     {       
            // dd($request->all());
             $cargo = Cargo::find($request->idCargo);
