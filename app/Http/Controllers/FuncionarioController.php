@@ -9,6 +9,7 @@ use App\Models\Naturalidade;
 use App\Models\Parente;
 use App\Models\Cargo;
 use App\Models\CategoriaFuncionario;
+use App\Models\Processo;
 use App\Models\Seccao;
 use App\Models\UnidadeOrganica;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -284,33 +285,22 @@ class FuncionarioController extends Controller
 
       //Update
       public function update(Request $request, string $id)
-      {  
-          
-        if (false) {  
-            DB::beginTransaction();
-            //Isolar ou identificar o Registro a Ser Alterado
-            $funcionario = Funcionario::where('id', $id)->first();
-            //Iniciar actualização
-            $funcionario->numeroAgente = $request->numeroAgente;
-            $funcionario->idCategoriaFuncionario = $request->idCategoriaFuncionario;
-            $funcionario->idCargo = $request->idCargo;
-            $funcionario->idSeccao = $request->idSeccao;
-            $funcionario->idUnidadeOrganica = $request->idUnidadeOrganica;
-            $funcionario->iban = $request->iban;
-            $funcionario->email = $request->email;
-            $funcionario->dataAdmissao = $request->dataAdmissao;
-            $funcionario->numeroTelefone = $request->numeroTelefone;
+      { 
+        // Verificar se campos de Nomeação Foram alterados fazendo comparação dos campos submetidos com campos do funcionário
+        $funcionario = Funcionario::find($id);
+        if ( $request->idUnidadeOrganica != $funcionario->idUnidadeOrganica || $request->idCargo != $funcionario->idCargo || $request->idSeccao != $funcionario->idSeccao ) {  
+        // dd('Cargo de Chefia ou nomeacao');
+            //Verificar se ja existe uma nomeação pendente
+           $nomeacao = Processo::where('categoria', "Nomeacao")->where('idFuncionarioSolicitante', $id)->where('estado', "Submetido")->exists();
+           $nomeFuncionarioSolicitante = Pessoa::find(Funcionario::find($id)->idPessoa)->nomeCompleto;
+           if ($nomeacao) {
+            return redirect()->back()->with('error', 'Já existe processo de nomeação pendente do Funcionário '.$nomeFuncionarioSolicitante.'!');
+           }
+           $FuncionarioSolicitante = Funcionario::find($id)->estado;
+           if ($FuncionarioSolicitante === "Falecido" || $FuncionarioSolicitante === "Aposentado") {
+            return redirect()->back()->with('error', 'O Funcionário '.$nomeFuncionarioSolicitante.' não pode ser nomeado por estar em estado Inactivo ou Aposentado!');
+           }
 
-              if ($funcionario->save()) {
-                  DB::commit();
-                  return redirect()->back()->with('success', 'Registro atualizado com sucesso.');
-              }else {
-                  DB::rollBack();
-                  return redirect()->back()->with('error', 'Erro de Acualização nda Entidade Funionário! ')->withErrors($request);
-              }
-           }  
-           //$dados=$request->all();
-           // dd($dados);
            $request->validate([
                   'idCargo' => [
                       Rule::unique('funcionarios')->where( function($query) {
@@ -350,7 +340,8 @@ class FuncionarioController extends Controller
                    if ($verificarCargoDirectorEscola) {
                    return redirect()->back()->with('error', 'O Cargo à Director para essa Escola não se encontra Disponível ');
                }else {
-                $cargoDirectorEscola=true;
+                    $cargoDirectorEscola = true;
+                    $dados['cargoDirectorEscola'] = $cargoDirectorEscola;
                }
               }
               //Verificar se é Nomeação de Cargo de Chefe de Secção
@@ -360,15 +351,36 @@ class FuncionarioController extends Controller
                     if ($verificarChefeSeccao) {
                     return redirect()->back()->with('error', 'O Cargo de Chefia para a Secção de '.$seccao->designacao.' não se encontra disponível! ');
                 }else {
-                    $cargoChefeSeccao=true;
+                    $cargoChefeSeccao = true;
+                    $dados['cargoChefeSeccao'] = $cargoChefeSeccao;
                 }
               }
             $dados =  http_build_query($dados);
             return redirect()->route('update.funcionario', ['dados' => $dados]);
             //return redirect()->route('funcionarios.nomeacao', ['numeroAgente' => $request->numeroAgente,'idUnidadeOrganica' => $request->idUnidadeOrganica,'motivo' => 'SN','categoria' => 'Nomeacao','natureza' => 'Despacho', 'idCargo' => $cargo->id]);
-    }
-             
+        }
 
+       // dd('É edicao de funcionario!');
+        DB::beginTransaction();
+        //Isolar ou identificar o Registro a Ser Alterado
+        $funcionario = Funcionario::where('id', $id)->first();
+        //Iniciar actualização
+        $funcionario->numeroAgente = $request->numeroAgente;
+        $funcionario->idCategoriaFuncionario = $request->idCategoriaFuncionario;
+        $funcionario->idCargo = $request->idCargo;
+        $funcionario->idSeccao = $request->idSeccao;
+        $funcionario->idUnidadeOrganica = $request->idUnidadeOrganica;
+        $funcionario->iban = $request->iban;
+        $funcionario->dataAdmissao = $request->dataAdmissao;
+        $funcionario->numeroTelefone = $request->numeroTelefone;
+          if ($funcionario->save()) {
+              DB::commit();
+              return redirect()->back()->with('success', 'Funcionário Actualizado com Sucesso!');
+          }else {
+              DB::rollBack();
+              return redirect()->back()->with('error', 'Erro de Actualização do Funcionário! ');
+          }
+   }  
     //Update
     public function updatea(Request $request, string $id)
     {       

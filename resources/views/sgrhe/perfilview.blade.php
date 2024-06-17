@@ -1,3 +1,7 @@
+@php
+  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+  $permissoes = $cargoLogado->permissoes;
+@endphp
 <!--Layout Principal-->
 @extends('layouts.app')
   @section('titulo' , 'Perfil - '.$pessoa->nomeCompleto )
@@ -182,13 +186,60 @@
                               </form>
                             </li>
                             <li>
-                              <form action="{{ route('ver.ficha.funcionario') }}" method="POST" >
+
+                            <form action="{{ route('ver.ficha.funcionario') }}" method="POST" >
                                 @csrf
                                 @method('POST')
                                 <input type="hidden" name="categoria" value="FichaFuncionario">
                                 <input type="hidden" name="idFuncionario" value="{{$funcionario->id}}">
-                                <input type="submit" class="btn btn-primary w-100" value="Ficha do Funcionário">
+                                <input type="submit" class="btn btn-primary w-100 m-1" value="Ficha do Funcionário">
                               </form>
+                              <br>
+                              @if ( ($permissoes === "Admin") || ($permissoes >= 4) )
+                              <form action="{{ route('ver.processos.funcionario') }}" method="POST" >
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="categoria" value="FichaFuncionario">
+                                <input type="hidden" name="idFuncionario" value="{{$funcionario->id}}">
+                                <input type="submit" class="btn btn-warning w-100 m-1" value="Processos do Funcionário">
+                              </form>
+                              @endif
+                                                      @if ( ($permissoes === "Admin") || ($permissoes >= 4 && $seccao === "RHPE") )
+                                                      <form action="{{ route('funcionarios.form', ['id' => $funcionario->idPessoa]) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-warning w-100 m-1">Editar Funcionário</button>
+                                                      </form>
+                                                      @endif
+                                                      @if ( ($permissoes === "Admin") || ($permissoes >= 4 && $seccao === "RHPE") )
+                                                      <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $funcionario->id }}">
+                                                          @csrf
+                                                          @method('DELETE')
+                                                          <input type="hidden" name="id" value="{{ $funcionario->id }}">
+                                                          <input type="hidden" name="categoria" value="Funcionario">
+                                                          <button type="submit" class="btn btn-danger w-100 m-1" onclick="confirmAndSubmit(event, 'Confirmar deletar  Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar Funcionário</button>
+                                                      </form>
+                                                      @endif
+                                                      @if ( ($permissoes === "Admin") || ($permissoes >= 4 && $seccao === "RHPE") )
+                                                      <form action="{{ route('formulario.avaliar.funcionario') }}" method="GET" style="display: inline;">
+                                                        @csrf
+                                                        <input type="hidden" name="idFuncionario" value="{{ $funcionario->id }}">
+                                                        <button type="submit" class="btn btn-primary w-100 m-1">Avaliar Desenpenho</button>
+                                                      </form>
+                                                      <form action="{{ route('estado.funcionario') }}" method="POST" id="deleteForm{{ $funcionario->id }}">
+                                                          @csrf
+                                                          @method('POST')
+                                                          <input type="hidden" name="id" value="{{ $funcionario->id }}">
+                                                          <select name="estado" id="" class="form-control select2">
+                                                            <option selected value="" class="w-100 m-1">Alterar o Estado do Funcionário</option>
+                                                            <option class="text-success font-weight-bold" value="Activo">Activo</option>
+                                                            <option class="text-info font-weight-bold" value="Licenca">Licença</option>
+                                                            <option class="text-secondary font-weight-bold" value="Aposentado">Aposentado</option>
+                                                            <option class="text-danger font-weight-bold" value="Falecido">Falecido</option>
+                                                          </select>
+                                                          <button type="submit" class="btn btn-secondary w-100 m-1" onclick="confirmAndSubmit(event, 'Confirmar Alterar o Estado do Funcionário?', 'Sim, Alterar!', 'Não, Cancelar!')">Alterar Stado</button>
+                                                      </form>
+                                                      @endif
                             </li>
                           </ul>
                           <a href="#" class="btn btn-primary d-none"><b>Enviar Mensagem</b></a>

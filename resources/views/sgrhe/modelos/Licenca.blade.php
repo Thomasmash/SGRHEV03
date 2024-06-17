@@ -185,15 +185,15 @@ $dataF= new DateTime($Request['dataFim']);
                                 </div>
                        @endif
                        <div style="position:absolute; z-index:2; width:100%;">
-                        <p style="font-weight: bold;">O Director Municipal</p>
-                                <p>__________________________</p>
-                                <p>Tunga Tomás dos Santos</p>
+                       <p style="font-weight: bold;">{{ ($pessoa->genero == 'Femenino') ? 'A' : 'O' }} Solicitante</p>
+                                <p style="margin: 0; padding:0;">____________________________</p>
+                                <p style="margin: 0; padding:0; font-weight: bold;">{{ $pessoa->nomeCompleto }}</p>
                        </div>
 
                 </div>
         </div>
         <div class="rodape">
-        <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find($funcionarioProcessador->idPessoa)->first()->nomeCompleto }}, {{ App\Models\Processo::find($idProcesso)->first()->updated_at}}.</p>
+        <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find($funcionarioProcessador->idPessoa)->nomeCompleto }}, {{ App\Models\Processo::find($idProcesso)->updated_at}}.</p>
         <br>
                 <div class="foot-esquerda">
                         <p>Direcção Municipal do Púri</p>

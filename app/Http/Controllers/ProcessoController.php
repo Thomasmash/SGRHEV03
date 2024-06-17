@@ -48,7 +48,7 @@ class ProcessoController extends Controller
             'caminho' => $caminho,
             'idFuncionario' => $Request['idFuncionarioSolicitante'],
         ]);
-        if ($request->parecer === 'Favoravel') {
+        if ($request->parecer == "Favoravel") {
             if ($Arquivo) {
                 $idArquivo = Arquivo::where('idFuncionario', $Request['idFuncionarioSolicitante'])->where('categoria', $Request['categoria'] )->latest()->first()->id;
                 $Processo = Processo::where('id', $request['idProcesso'])->first();
@@ -63,7 +63,7 @@ class ProcessoController extends Controller
                     //Se Categoria for Transferencia ou Nomeacao ou Edicao Efectivara a Mudanca nesta Sec
                     if ($Request['categoria']=="Transferencia") {
                         $funcionario = Funcionario::find($Request['idFuncionarioSolicitante']);
-                       // dd($funcionario);
+                        // dd($funcionario);
                         $funcionario->idUnidadeOrganica = $Request['idUnidadeOrganica'];
                         //Se a pessoa a ser Trasferida for Director 
                         $cargoFuncionarioSolicitante = Cargo::where('id', Funcionario::find($Request['idFuncionarioSolicitante'])->idCargo)->first()->designacao;
@@ -73,13 +73,15 @@ class ProcessoController extends Controller
                         }
                         $funcionario->save();   
                     }
-
-                    if ($Request['categoria']=="Nomeacao") {
-                        //Efectivar as Mudancas para o Funcionário  //23121997
-                        //DB::beginTransaction();
-                        //Isolar ou identificar o Registro a Ser Alterado
+                    if ($Request['categoria'] == "Nomeacao") {
+                    //Efectivar as Mudancas para o Funcionário  //23121997
+                    //DB::beginTransaction();
+                    //Isolar ou identificar o Registros a Serem Alterados
+                    //Iniciar actualização
+                        //$Processo = Processo::where('id', $request['idProcesso'])->first();
+                        $Processo->estado = "Aprovado";
+                        //$Processo->save();
                         $funcionario = Funcionario::where('id', $Request['idFuncionarioSolicitante'])->first();
-                        //Iniciar actualização
                         $funcionario->numeroAgente = $Request['numeroAgente'];
                         $funcionario->idCategoriaFuncionario =  $Request['idCategoriaFuncionario'];
                         $funcionario->idCargo =  $Request['idCargo'];
@@ -90,12 +92,28 @@ class ProcessoController extends Controller
                         $funcionario->numeroTelefone =  $Request['numeroTelefone'];
                         $funcionario->save();
                     }
-                    
                     //Se Categoria for Licenca
-                    if ($Request['categoria']=="Lecenca") {
-                      dd('Licenca');
+                    if ($Request['categoria'] == "Licenca") {
+                    //Isolar ou identificar o Registros a Serem Alterados
+                    //Iniciar actualização
+                       //$Processo = Processo::where('id', $request['idProcesso'])->first();
+                       $Processo->estado = "Aprovado";
+                       //$Processo->save();
+                       $funcionario = Funcionario::where('id', $Request['idFuncionarioSolicitante'])->first();
+                       $funcionario->estado = 'Licenca';
+                       $funcionario->save();
                     }
-
+                    if ($Request['categoria'] == "GozoFerias") {
+                        //Isolar ou identificar o Registros a Serem Alterados
+                    //Iniciar actualização
+                       $Processo = Processo::where('id', $request['idProcesso'])->first();
+                       $Processo->idArquivo = $idArquivo;
+                       $Processo->estado = "Aprovado";
+                       //$Processo->save();
+                       $funcionario = Funcionario::where('id', $Request['idFuncionarioSolicitante'])->first();
+                       $funcionario->estado = 'Licenca';
+                       $funcionario->save();
+                      }
                     if ($Processo->save()) {
                         return redirect()->back()->with('success', 'Parecer aplicado com sucesso!');
                     } 
@@ -200,11 +218,6 @@ class ProcessoController extends Controller
         //Registro o Processo no Bango de dados e Salvamento do Arquivo Gerado no Banco de Dados 
     }
 */
-
-
-    /**
-     * Display a listing of the resource.
-     */
 
     public function ratificar(Request $request)
     {
@@ -338,6 +351,12 @@ class ProcessoController extends Controller
     public function solicitar(Request $request)
     { 
        // dd($request->all());
+       //Verificar Sttus do Funcionário se é aplicavel para Socicitacao do servico //23121997
+       $FuncionarioSolicitante = Funcionario::find($request->idFuncionarioSolicitante)->estado;
+       if ($FuncionarioSolicitante === "Falecido" || $FuncionarioSolicitante === "Aposentado") {
+        return redirect()->back()->with('error', 'O Funcionário  não pode solicitar serviços por estar em estado Inactivo ou Aposentado, em caso de erro dirija-se a Repartição Municipal da Educação');
+       }
+       
         if (($request->categoria=="GozoFerias") && (isset($request->dataInicio))) {
             $request->validate([
                 'dataInicio' => ['required', 'date', 'after_or_equal:today'],
@@ -358,7 +377,7 @@ class ProcessoController extends Controller
             ],
         ],[
             //Menssagem personalizada 
-            'categoria' => 'Já tens uma solicitação da mesma natureza pendente, Cancele para submisão de uma nova ou aguarde o deferimento!',
+            'categoria' => 'Já existe uma solicitação da mesma natureza pendente, Cancele para submisão de uma nova ou aguarde o deferimento!',
 
         ]);
         $processo = Processo::create([
@@ -483,11 +502,20 @@ class ProcessoController extends Controller
         $cargo = Cargo::where('id',$funcionario->idCargo)->first();
         $unidadeOrganica = UnidadeOrganica::where('id',$funcionario->idUnidadeOrganica)->first();
         $categoriaFuncionario = CategoriaFuncionario::where('id',$funcionario->idCategoriaFuncionario)->first();
-        $arquivos = Arquivo::where('idFuncionario',$funcionario->id);
+        //$arquivos = Arquivo::where('idFuncionario',$funcionario->id);
        // dd($processo);;
-        return view('sgrhe/processos-seccao',compact('funcionario','pessoa','cargo','unidadeOrganica','categoriaFuncionario','arquivos','processos'));
+        return view('sgrhe/processos-seccao',compact('funcionario','pessoa','cargo','unidadeOrganica','categoriaFuncionario','processos'));
  
     }
+    public function verProcessosFuncionario(Request $request)
+    {
+        $funcionarioSolicitante = Funcionario::find($request->idFuncionario);
+        $processos = Processo::orderBy('created_at', 'desc')->where('idFuncionarioSolicitante', $funcionarioSolicitante->id)->get();
+        $pessoaSolicitante = Pessoa::where('id',$funcionarioSolicitante->idPessoa)->first();
+        return view('sgrhe/pages/tables/processos-funcionario',compact('funcionarioSolicitante','processos','pessoaSolicitante'));
+ 
+    }
+    
     
     
 }

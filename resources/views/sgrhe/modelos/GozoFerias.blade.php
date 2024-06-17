@@ -136,6 +136,9 @@ $dataI= new DateTime($Request['dataInicio']);
                         transform: rotate(-60deg);
 
                 }
+                .artigo{
+                        font-style: italic;
+                }
                 
        </style>
 </head>
@@ -155,7 +158,7 @@ $dataI= new DateTime($Request['dataInicio']);
         <div class="corpo">
                 <div class="titulo ">
                         <br>
-                        <p>Pedido de Gozo de Férias </p>
+                        <p>PEDIDO DE AUTORIZAÇÃO DE GOZO DE FÉRIAS </p>
                         <br>
                         <p style="text-align: left;">#{{ App\Models\Processo::where('categoria', $categoriaProcesso)->count() }}/{{ date('Y').' '}}DME-PÚRI</p>
                         <br>
@@ -166,17 +169,18 @@ $dataI= new DateTime($Request['dataInicio']);
                                 $Proximos30 = new DateTime($dataI->format('d-m-Y'));
                                 $Proximos30->modify('+30 days');
                         @endphp
-                        <span style="font-weight: bold;">{{$pessoa->nomeCompleto}}</span>, Professoar(a) <span>convertido(a) na função de {{$cargo->designacao}} na {{ $unidadeOrganica->designacao}}</span>.
-                        <p>Tendo em conta os dispostos vertidos na alinea <span class="artigo">h) do artigo 9º</span>. concatenando com o <span class="artigo">nº 1 </span> dos artigos <span class="artigos">77º, 78º, 79 e 83º</span> todos da Lei <span class="artigo">nº 26/22 de Agosto</span>;</p>
-                        <p>A funcionária supracitada vem mui respeitosamente requerer a Sua Excelência Senhor Director Municipal da Educação, se digne autorizar as suas férias no periódo  {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($dataI))) }} até {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($Proximos30))) }}, de formas a recuperar as suas condições físicas e psíquicas de desgaste, provocadas pela prestação da sua actividadelaboral em conformidade com o plano de férias gizado pela Secretaria da Direcção Municipal.</p>
-                        <p>Espera Deferimento.</p>
+                        <span style="font-weight: bold;">{{$pessoa->nomeCompleto}}</span>, Professoar{{ ($pessoa->genero == 'Femenino') ? 'a' : 'o' }} convertid{{ ($pessoa->genero == 'Femenino') ? 'a' : 'o' }} na função de {{$cargo->designacao}} na {{ $unidadeOrganica->designacao}}.
+                        <p>Tendo em conta os dispostos vertidos na alinea <span class="artigo">h)</span> do artigo <span class="artigo">9º</span>. concatenando com o <span class="artigo">nº 1 </span> dos artigos <span class="artigo">77º, 78º, 79 e 83º</span> todos da Lei <span class="artigo">nº 26/22</span>de Agosto;</p>
+                        <p>{{ ($pessoa->genero == 'Femenino') ? 'A' : 'O' }} funcionári{{ ($pessoa->genero == 'Femenino') ? 'a' : 'o' }} supracitad{{ ($pessoa->genero == 'Femenino') ? 'a' : 'o' }} vem mui respeitosamente requerer a Sua Excelência Senhor Director Municipal da Educação, se digne autorizar as suas férias no periódo <span style="font-weight: bold;"> {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($dataI))) }} até {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($Proximos30))) }}</span>, de formas a recuperar as suas condições físicas e psíquicas de desgaste, provocadas pela prestação da sua actividadelaboral em conformidade com o plano de férias gizado pela Secretaria da Direcção Municipal.</p>
+                       
 
                 </div>
                 <div class="preenchimento">
-                       # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # ###  
+                       = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 </div>
                 <div class="conclusao">
-                     
+                        Pelo que:
+                        <p>Espera Deferimento.</p>
                 </div>
                 <div class="data-local">
                         <?php
@@ -196,15 +200,15 @@ $dataI= new DateTime($Request['dataInicio']);
                                 </div>
                        @endif
                        <div style="position:absolute; z-index:2; width:100%;">
-                        <p style="font-weight: bold;">O Requerente</p>
-                                <p>__________________________</p>
-                                <p>{{$pessoa->nomeCompleto}}</p>
+                        <p style="font-weight: bold;">{{ ($pessoa->genero == 'Femenino') ? 'A' : 'O' }} Solicitante</p>
+                                <p style="margin: 0; padding:0;">____________________________</p>
+                                <p style="margin: 0; padding:0; font-weight: bold;">{{ $pessoa->nomeCompleto }}</p>
                        </div>
 
                 </div>
         </div>
         <div class="rodape">
-        <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find($funcionarioProcessador->idPessoa)->first()->nomeCompleto }}, {{ App\Models\Processo::find($idProcesso)->first()->updated_at}}.</p>
+        <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find($funcionarioProcessador->idPessoa)->first()->nomeCompleto }}, {{ App\Models\Processo::find($idProcesso)->updated_at}}.</p>
         <br>
                 <div class="foot-esquerda">
                         <p>Direcção Municipal do Púri</p>

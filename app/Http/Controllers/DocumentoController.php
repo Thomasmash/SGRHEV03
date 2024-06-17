@@ -27,7 +27,12 @@ class DocumentoController extends Controller
      */
     public function inserirDocumento(Request $request)
     {
-       // dd($request->all());
+        // Verificar se o funcionario pode ou ser actualizado
+        $nomeFuncionarioSolicitante = Pessoa::find(Funcionario::find($request->idFuncionario)->idPessoa)->nomeCompleto;
+        $FuncionarioSolicitante = Funcionario::find($request->idFuncionario)->estado;
+        if (!($FuncionarioSolicitante == "Activo") || !($FuncionarioSolicitante == "Licenca")) {
+         return redirect()->back()->with('error', 'O Funcionário '.$nomeFuncionarioSolicitante.' não pode ser actualizado por estar em estado Inactivo ou Aposentado!');
+        }
         $idFuncionario = $request->idFuncionario;
         $nome = Pessoa::find(Funcionario::find($idFuncionario)->idPessoa)->first()->nomeCompleto;
         $categoria = $request->categoria;

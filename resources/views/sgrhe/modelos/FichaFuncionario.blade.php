@@ -164,25 +164,15 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
         <div class="corpo">
                 <div class="titulo ">
                         <br>
-                        <p>Ficha do funcionário </p>
+                        <p>FICHA DO FUNCIONÁRIO </p>
                         <br>
                 </div>
                 <div class="corpo">
                         <p>
-                        ALFREDO JOSÉ MÁRIO Director Municipal da Educaçcão, declaro por minha honra profissional que o senhor {{ $pessoa->nomeCompleto }}, solteiro de {{ $pessoa->dataNascimento }} anos de idade, filho de  {{ $parente->nomePai }}, e de {{ $parente->nomeMae }}, nascido aos {{ $pessoa->dataNascimento }}, natural de {{ $naturalidade->municipio }}, Município de  {{ $naturalidade->municipio }}, Província de {{ $naturalidade->provincia }}, portador do B.I. nº {{ $pessoa->numeroBI }}, passado pelo Sector de Identificação de Uíge aos 28 de Abril de {{ date('Y')}}
+                        <span style="font-weight: bold;">{{ $pessoa->nomeCompleto }}</span>, solteiro de {{ $pessoa->dataNascimento }} anos de idade, filho de  {{ $parente->nomePai }}, e de {{ $parente->nomeMae }}, nascido aos {{ $pessoa->dataNascimento }}, natural de {{ $naturalidade->municipio }}, Município de  {{ $naturalidade->municipio }}, Província de {{ $naturalidade->provincia }}, portador do B.I. nº {{ $pessoa->numeroBI }}.
                         </p>
                         <p>
-                                É {{ $cargo->designacao }}, convertido na categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }}, salario base de {{ $categoriaFuncionario->salariobase }} com o número de agente {{ $funcionario->numeroAgente }} colocado na Unidade Organica, {{ $unidadeOrganica->designacao }} 
-                        </p>
-                        <p>
-                               Texto
-                        </p>
-                        <div class="preenchimento">
-                       # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # ###  
-                        </div>
-                    
-                        <p>
-                               Venho por Este meio Solicitar a Transferencia ...... 
+                         É {{ $cargo->designacao }}, convertido na categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }}, salario base de {{ $categoriaFuncionario->salariobase }} com o número de agente {{ $funcionario->numeroAgente }} colocado na Unidade Organica, {{ $unidadeOrganica->designacao }}.
                         </p>
                 </div>
                 <div class="data-local">
@@ -190,7 +180,7 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                         setlocale(LC_TIME, 'pt_BR' , 'pt_BR.utf-8', 'portuguese' );
                         //Lembrar de Implementar  Arquivos de Localizacao em portugues no servidor PHP
                         ?>
-                        <p>Direcção Municipal da Educação do Púri, _____/_______________/_______ </p>
+                              <p>Direcção Municipal da Educação do Púri, {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse(date('d-m-Y')))) }}</p>
                 </div>
                 <div class="autenticacao" style="position:relative; text-align:center;" >
                 <!--Importar a Imagem de assinatura do Funionario e posteriomente aolicar mecanismos de assinatura digital com verifcacao com codigo QR-->
@@ -203,15 +193,15 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                                 </div>
                        @endif
                        <div style="position:absolute; z-index:2; width:100%;">
-                        <p style="font-weight: bold;">O Director Municipal</p>
+                       <p style="font-weight: bold;">{{ ($pessoa->genero == 'Femenino') ? 'A' : 'O' }} Funcionário</p>
                                 <p style="margin: 0; padding:0;">____________________________</p>
-                                <p style="margin: 0; padding:0;">Afredo José Mário</p>
+                                <p style="margin: 0; padding:0; font-weight: bold;"> {{ App\Models\Pessoa::find(session()->only(['funcionario'])['funcionario']->idPessoa)->nomeCompleto }}</p>
                        </div>
 
                 </div>
         </div>
         <div class="rodape">
-        <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find($funcionarioProcessador->idPessoa)->first()->nomeCompleto }}, {{ App\Models\Processo::find($idProcesso)->first()->updated_at}}.</p>
+        <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find(session()->only(['funcionario'])['funcionario']->idPessoa)->nomeCompleto }}, {{ now() }}.</p>
         <br>
                 <div class="foot-esquerda">
                         <p>Direcção Municipal do Púri</p>

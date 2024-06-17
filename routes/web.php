@@ -259,6 +259,7 @@ Route::any('/exibir/documento/',[ArquivoController::class,'exibirDocumento'])->n
 //Rota para Adicionar Documento Baixar Documento
 Route::any('/uplod/file', [ArquivoController::class,'uploadFile'])->name('upload.file');
 Route::any('/dowload/file', [ArquivoController::class,'dowloadFile'])->name('dowload.file');
+
 //Area De Rotas de Processos 
 
 //Solicitacoes 
@@ -287,8 +288,9 @@ Route::any('/ver/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionarioControl
 Route::post('/homologar/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionarioController::class,'homologar'])->name('homologar.avaliacao');
 
 
-//Solicitar Processos Genericos
-//Route::any('/solicitar/processo/',[ProcessoController::class, 'solicitarProcesso'])->name('solicitar.processo'); 
+//Solicitar Lista de Processos de Um Funcionario
+Route::any('/ver/processos/funcionario',[ProcessoController::class, 'verProcessosFuncionario'])->name('ver.processos.funcionario'); 
+
 
 //Assinaturas / ficheiros
 Route::any('/assinatura/update', [AssinaturaController::class,'assinaturaUpdate'])->name('assinatura.update');

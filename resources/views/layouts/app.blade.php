@@ -206,7 +206,7 @@ use Illuminate\Support\Facades\Auth;
                                                         icon: "error",
                                                         title: "Erro!",
                                                         text: "{{ session('error') }}",
-                                                        timer: 2000
+                                                       // timer: 2000
                                                         });                                
                                                 </script>
                                                     @php
@@ -221,7 +221,7 @@ use Illuminate\Support\Facades\Auth;
                                                             icon: "success",
                                                             title: "Feito!",
                                                             text: "{{ session('success') }}",
-                                                            timer: 2000
+                                                            timer: 3000
                                                             });                                   
                                                     </script>
                                                     @php
@@ -253,7 +253,7 @@ use Illuminate\Support\Facades\Auth;
                                                             icon: "success",
                                                             title: "Feito!",
                                                             text: "{{ $feito }}",
-                                                            timer: 2000
+                                                            //timer: 2000
                                                             }); 
                                     
                                                     </script>

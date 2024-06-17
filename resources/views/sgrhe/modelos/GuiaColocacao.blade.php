@@ -174,7 +174,7 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                         Por esta Direcção Municipal, se faz constar as autoridades a quem o conhencimento desta competir que segue viagem para a {{ $unidadeOrganicaOndeVai->designacao }}, O Senhor <span style="font-weight: bold;">{{ $pessoa->nomeCompleto }}</span>, agente nº <span style="font-weight: bold;">{{ $funcionario->numeroAgente }} </span>, com a categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }} , a fim de exercer as suas funções na mesma.
                         </p>
                         <div class="preenchimento">
-                       # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # ###  
+                       = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =  
                         </div>
                     
                         <p>
@@ -210,7 +210,7 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                 </div>
         </div>
         <div class="rodape">
-        <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find($funcionarioProcessador->idPessoa)->first()->nomeCompleto }}, {{ App\Models\Processo::find($idProcesso)->first()->updated_at}}.</p>
+        <p style="font-size: x-small;">Status: {{ App\Models\Pessoa::find($funcionarioProcessador->idPessoa)->nomeCompleto }}, {{ App\Models\Processo::find($idProcesso)->updated_at}}.</p>
         <br>
                 <div class="foot-esquerda">
                         <p>Direcção Municipal do Púri</p>
