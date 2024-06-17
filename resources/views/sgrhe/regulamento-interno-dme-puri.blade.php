@@ -67,10 +67,244 @@
                   <div class="col-md-12">
                    <div class="card card-primary">
                     <div class="card-header">
-                      <h3>Regulamento Interno da Direcção Municipal da Educação</h3>
+                      <h3>Regulamento Interno da Direcção Municipal da Educação do Púri</h3>
                     </div>
                     <div class="card-body">
-                      corpo
+                    REPÚBLICA DE ANGOLA GOVERNO PROVINCIAL DO VÍGE ADMINISTRAÇÃO MUNICIPAL DO PÚRI GABINETE DA ADMINISTRADORA
+                        DESPACHO N° 0 3 / GAB. ADM.MUN.PU/2023
+                        Havendo necessidade de se estabelecer o modo de estruturação, organização e funcionamento da Direcção Municipal da Educação do Púri, ajustado ao seu perfil das acções, actividades, programas, projectos e medidas de políticas no seu domínio, tendo em vista a realização das suas atribuições;
+                        Em conformidade com n° 1 do artigo 88°, do Decreto Presidencial no 260/10, de 19 de Novembro, conjugado com a alínea d) do n° 4 do artigo 5 do Decreto Legislativo -Presidencial no 2/13, de forma a melhorar a disciplina, rentabilizar e racionalizar os recursos humanos e matérias, assim como adequá-lo a reforma geral da Administração Pública;
+                        Administração Municipal do Púri, nos termos do n° 2do artigo 11o da Lei no 15/16, de 12 de Setembro, Lei da Administração local do Estado, conjugado com a alínea o) do artigo 11° do Decreto Presidencial n° 202/19 de 25 de Junho (Regulamento da Lei da Administração Local do Estado) e com n° 1 do artigo 1° do Decreto executivo no 56/20 de 17 de Fevereiro, que aprova o Estatuto Orgânico da Administração Municipal do Púri
+                        determina o seguinte:
+                        DETERMINA:
+                        1º É aprovado o Estatuto orgânico da Direcção Municipal da Educação do Púri, anexo á presente Resolução e que dele faz parte integrante.
+                        2º São revogadas todas as disposições que contrariem o disposto no presente despacho.
+                        3º As dúvidas e omissões resultantes da interpretação e aplicação do presente despacho são resolvidos pela administração Municipal do Púri.
+                        4º O presente despacho entra imediatamente em vigor 
+                        PROPOSTA DE REGULAMENTO INTERNO DE ORGANIZAÇÃO E FUNCIONAMENTO DA DIRECÇÃO MUNICIPAL DA EDUCAÇÃO DO PÚRI.
+
+                        CAPÍTULO. I
+                        DISPOSIÇÕES GERAIS
+                        Artigo 1°. (Objecto)
+                        O presente instrumento regula os princípios de organização e funcionamento da Direcção Municipal da Educação do Púri bem como estabelece a sua estrutura orgânica.
+                        Artigo 2. ° (Âmbito)
+                        O presente regulamento aplica-se exclusivamente à Direcção Municipal da
+                        Educação do Púri.
+                        Artigo 3°.
+                        (Definição, Provimento e Competências)
+                        A Direcção Municipal da Educação é o serviço desconcentrado da Administração Municipal, incumbido de assegurar a execução das acções, actividades, programas, projectos e medidas de políticas, no domínio da Educação, do Ensino e Alfabetização ao nível do Município, bem coordenar programas Municipais que visem o desenvolvimento científico, tecnológico e a Inovação ao nível do Município.
+                        Artigo 4. °
+                        (Atribuições)
+                        Direcção Municipal da Educação tem as seguintes atribuições:
+                        a) Promover, controlar e coordenar a capacitação de funcionários ligados ao Sector, em estreita colaboração com Gabinete Provincial da
+                        Educação;
+                        b) Gerir estabelecimentos de Educação Pré-Escolar e do Ensino Primário; c) Programar a construção, apetrechamento e a manutenção dos estabelecimentos de Educação Pré-Escolar e Ensino Primário em estreita colaboração com o GEPE;
+                        d) Colaborar na gestão da carreira do pessoal docente e administrativo dos estabelecimentos de ensino;
+                        e) Promover o apetrechamento em mobiliário, material didáctico e manuais escolares, nos estabelecimentos de Ensino Pré-Escolar e ensino Primário;
+                        f) Comparticipar no apoio às crianças da Educação Pré-Escolar e do Ensino primário no domínio da acção social e escolar;
+                        g) Apoiar a educação extra-escolar e o desporto escolar, bem como o desenvolvimento de actividades complementares da acção educativa Pré-Escolar e Ensino Primário;
+                        h) Promover a construção e a manutenção de estabelecimentos de Educação Pré-Escolar e Ensino Primário, bem como promover o transporte escolar;
+                        i)1 Implementar a merenda escolar e gerir os refeitórios dos estabelecimentos de Educação Pré-Escolar e no Ensino Primário, preferencialmente com produtos locais;
+                        j) Controlar as actividades dos institutos públicos do ramo, sob a orientação metodológica da estrutura competente ao nível central;
+                        k) Promover actividades de educação da juventude e de desporto escolares, bem como dinamizar o desenvolvimento da cultura e da
+                        recreação juvenil, ao nível do Município;
+                        l) Promover actividade de desenvolvimento científico e tecnológico, bem como iniciativas que promovam a inovação;
+                        m) Comparticipar no apoio às crianças da Educação Pré-Escolar e os alunos do Ensino Primário no domínio da acção social e escolar;
+                        n) Exercer as demais competências estabelecidas por lei ou determinadas superiormente.
+                        CAPÍTULO. II
+                        Artigo 5. °
+                        (Definição)
+                        O Director Municipal da Educação, é o órgão auxiliar do Administrador Municipal, a quem é incumbido em geral, dirigir e assegurar o normal funcionamento da Direcção, respondendo pela sua actividade perante o Administrador Municipal.
+                        Artigo 6. °
+                        (Provimento)
+                        1. O Director Municipal da Educação é nomeado por despacho do Administrador Municipal.
+                        2. Os candidatos ao cargo de Director Municipal da Educação devem ter as habilitações mínima de técnico superior em Ciências da Educação e ser pessoal quadro definitivo.
+                        3. Excepcionalmente, pode ser nomeado à Director Municipal, qualquer cidadão, mesmo sem vínculo laboral com a Administração Pública, desde que a sua nomeação se ache oportuna e vantajosa e cumpra com as disposições da lei de base da função pública, devendo para tal ser técnico superior em Ciências da Educação. 
+                        Artigo 7. °
+                        (Competências)
+                        1 Compete ao Director Municipal:
+                        a) Orientar e controlar toda a actividade da Direcção Municipal, zelando pelo cumprimento das suas atribuições;
+                        b) Apresentar relatórios trimestrais das actividades realizadas ao Administrador Municipal bem como ao Director do Gabinete Provincial da Educação respectivamente;
+                        c) Apresentar ao Administrador Municipal, o plano anual de actividades da Direcção para a sua aprovação;
+                        d) Garantir os meios necessários para a prossecução das actividades da Direcção;
+                        e) Representar, assinar e visar toda a documentação em nome da Direcção;
+                        f) Emitir pareceres sobre as matérias que lhe forem solicitadas;
+                        g) Propor a promoção e transferência do pessoal do quadro do regime geral da Direcção;
+                        h) Executar as orientações emanadas pelo Administrador Municipal e as directrizes do Ministério em geral no estrito cumprimento da Constitucionalidade e da legalidade;
+                        i) Submeter ao Administrador Municipal os assuntos que careçam de apreciação superior;
+                        j)1 Assegurar e garantir o cumprimento zeloso das orientações metodológicas sobre o sistema de Ensino emanado pelo Ministério da Educação;
+                        k) Convocar as reuniões do Conselho de Direcção;
+                        l)1 Autorizar o gozo de licença disciplinar do pessoal do quadro do regime geral da Direcção, com excepção dos Chefes de Secções;
+                        m) Participar da avaliação de desempenho do pessoal afecto à Direcção;
+                        n) Executar as dotações orçamentais da Direcção nos termos da lei.
+                        o) Garantir os materiais necessários e equipamentos para o normal funcionamento da Direcção Municipal;
+                        p) Exercer as demais funções que lhe forem acometidas superiormente e por lei;
+                        2. Nas suas ausências o Director Municipal é substituído por um Chefe de Secção.
+                        Artigo 8. °
+                        (Forma dos actos)
+                        Os actos do Director Municipal obedecem a forma de pareceres, circulares, ordens de serviços, indicações e Comunicações Internas.
+                        CAPÍTULO.III
+                        Estrutura Orgânica Secção I Estrutura Orgânica em Geral
+                        Artigo 9. °
+                        (Estrutura orgânica)
+                        A Direcção Municipal da Educação é composta por: 
+                        1. Serviço de apoio consultivo:
+                        a) Conselho de Direcção, 
+                        b) Conselho Consultivo.
+                        2. Serviços de apoio técnico;
+                        a) Secção de Educação e Ensino;
+                        b) Secção de Planeamento, Estatística e Recursos Humanos; c) Secção de Inspecção Escolar;
+                        d) Secção de Ciências, Tecnologia e Inovação. 
+                        3. Serviço de Apoio Instrumental
+
+                        Secção II"
+                        (Da Organização em Especial)
+                        Subsecção I
+                        (Serviço de apoio Consultivo)
+                        Artigo 10. °
+                        O Conselho Consultivo é um órgão de apoio ao Director Municipal, de actuação periódica, ao qual compete exercer atribuições de natureza consultiva, para a definição dos planos da Direcção, bem como avaliação dos resultados.
+                        2. O conselho Consultivo reúne - se, em geral, ordinária ou
+                        extraordinariamente duas vezes por ano, e, quando as circunstâncias as exigirem, sempre convocado pelo Director Municipal;
+                        3. O Director Municipal pode, sempre que necessário, convidar ou convocar outras entidades para participar nas sessões do Conselho Consultivo.
+                        4. O Conselho Consultivo é presidido pelo Director Municipal e integra os seguintes membros:
+                        a) Secção de Educação e Ensino;
+                        b) Secção de Planeamento, Estatística e Recursos Humanos; c) Secção de Inspecção Escolar;
+                        d) Secção de Ciências, Tecnologia e Inovação; e) Directores de Escolas;
+                        1) Outros que o Director achar importante convidar. 
+                        Artigo 11. °
+                        (Conselho de Direcção)
+                        1. O Conselho de Direcção é o órgão de Consulta do Director Municipal, em matérias de gestão, organização e funcionamento da Direcção, competindo-lhe:
+                        a) Emitir pareceres sobre a forma de materialização das atribuições da Direcção,
+                        b) Propor planos de desenvolvimento do sector;
+                        c) Balancear as actividades realizadas pela Direcção, numa periodicidade bimensal.
+                        d) Analisar as questões que o Director, pela sua importância, entenda remeter para a discussão.
+                        e) Deliberar as matérias atinentes a afectação de professores nas diversas escolas do Município;
+                        f) Aprovar trimestralmente o relatório de execução dos recursos financeiros afectos a Direcção;
+                        9) Analisar a situação do património da Direcção e propor a aquisição do novo acervo patrimonial;
+                        2.O Conselho de Direcção é presidido pelo Director Municipal e integra os seguintes membros:
+                        a) Secção de Educação e Ensino;
+                        b) Secção de Planeamento, Estatística e Recursos Humanos;
+                        c) Secção de Inspecção Escolar;
+                        d) Secção de Ciências, Tecnologia e Inovação.
+                        e) Outros que o Director achar importante convidar, mas sem direito à voto.
+                        Artigo 11. °
+                        (Reuniões)
+                        .1 O Conselho de Direcção reúne-se bimensal de forma ordinária e extraordinariamente, quando as circunstâncias as exigirem.
+                        Subsecção II
+                        (Serviços de apoio técnico)
+                        Artigo 12. °
+                        (Secção de Educação e Ensino)
+                        1 A Secção Municipal de Educação e Ensino é o serviço de apoio técnico do Director a quem é incumbida a tarefa de aplicar as estratégias e políticas educativas no domínio da Educação Pré-Escolar, Ensino Primário e subsistemas de Ensino geral.
+                        2. A Secção Municipal de Educação e Ensino tem as seguintes competências:
+                        a) Garantir a aplicabilidade do calendário escolar a ser executado nos Centros Infantis e Escolas Primárias e Secundárias;
+                        b) Assegurar a orientação pedagógica e metodológica da prática educativa; 
+                        c) Identificar as necessidades sobre a reciclagem e superação dos educadores de infância, auxiliares de acção educativa e professores do ensino primário para as instituições de ensino sob sua dependência e submeter ao Director Municipal;
+                        d) Velar pelo cumprimento dos planos e programas de estudos aprovados para o subsistema de educação de adultos
+                        e) Exercer as demais competências estabelecidas por lei ou determinadas superiormente.
+                        Artigo 13. °
+                        (Secção de Planeamento, Estatística e Recursos Humanos)
+                        1. A Secção Municipal de Planeamento e Estatística e Recursos Humanos é o serviço de apoio técnico do Director a quem é incumbida a tarefa elaborar estudos e análises sobre as matérias compreendidas da Direcção Municipal, planificar, coordenar a realização das actividades globais da Direcção bem como garantir a gestão administrativa e técnica do capital humano.
+                        2. Compete à Secção Municipal Planeamento, Estatística e Recursos Humanos:
+                        a) No âmbito do Planeamento e Estatística:
+                        I.	Elaborar a programação e controlar a execução dos recursos financeiros atribuídas à Direcção;
+                        II.	Elaborar as estatísticas das diversas escolas e institutos afectos ao Município;
+                        III.	Organizar e actualizar a base de dados do acervo patrimonial da Direcção Municipal;
+                        IV.	Elaborar propostas de construção de novas escolas primárias a nível do Município;
+                        V.	Fazer distribuição de forma equitativa e proporcional os bens adquiridos pela Direcção as Escolas e diferentes Secções sob égide da Direcção;
+                        b) No âmbito dos Recursos Humanos:
+
+                        I.	Elaborar mapas estatísticos sobre assiduidade, horas acrescidas, absentismo, doenças e outros processos sobre o desempenho
+                        II.	laboral dos funcionários da Direcção Municipal;
+                        III.	Realizar a avaliação de desempenho e gerir as carreiras para funcionários de todas as secções;
+                        IV.	Elaborar a propostas de distribuição dos professores para as distintas escolas;
+                        V.	Emitir parecer sobre as propostas de transferência do pessoal do quadro geral para quaisquer outras áreas;
+                        VI.	Propor ciclos de formação para o pessoal do quadro docente e não docente;
+                        VII.	Propor ao órgão competente processos disciplinares para os agentes que infrinjam as normas do Sector;
+                        VIII.	Exercer as demais competências estabelecidas por lei e determinadas superiormente.
+                        Artigo 14. °
+                        (Secção de Inspecção Escolar)
+                        1. A Secção de Inspecção Municipal de Educação é o serviço técnico que tem como função realizar o acompanhamento, controlo e fiscalização das actividades desenvolvidas no sistema de Educação e Ensino, cuja missão incide nas Instituições de Ensino público e privado.
+                        2. Secção de Inspecção Municipal de Educação tem as seguintes competências:
+                        a) Realizar inspecções e auditorias, às instituições de ensino, em casos pontuais quando superiormente orientadas;
+                        b) Controlar a aplicação das políticas educacionais aprovadas pelo Ministério e Gabinete Provincial da Educação, ao nível do Município;
+                        c) Supervisionar a implementação dos currículos, planos e programas dos cursos, superiormente aprovados;
+                        d) Promover a cultura de auto-avaliação nas instituições de ensino;
+                        e) Comprovar o rendimento do Sistema de Educação e Ensino nos seus aspectos educativo e formativo;
+                        f) Informar aos órgãos competentes sobre os resultados do trabalho realizado, a situação real do sector e propor medidas correctivas com regularidade;
+                        g) Propor, de forma fundamenta, o encerramento dos centros infantis e instituições de ensino;
+                        h) Facilitar a instrução dos processos disciplinares e responsabilização administrativa em articulação com o órgão competente quando for devidamente solicitado;
+                        i)1 Exercer as demais competências estabelecidas por lei e determinadas
+                        superiormente.
+                        Artigo 15. °
+                        (Secção de Ciências, Tecnologia e Inovação)
+                        1. A Secção de Ciências, Tecnologia e Inovação, é um serviço de apoio técnico, responsável pelo desenvolvimento das tecnologias de informação e comunicação e manutenção dos sistemas de informação com vista a dar suporte às actividades de modernização e inovação, bem como elaborar, implementar, coordenar e monitorizar as políticas de comunicação institucional e imprensa da Direcção Municipal.
+                        2. Secção de Ciências, Tecnologias e Inovação da Direcção Municipal de Educação, tem as seguintes competências:
+                        a) Garantir as políticas do Ministério no domínio das tecnologias de
+                        informação sejam implementas no sector da Educação a nível do Município;
+                        b) Emitir parecer sobre a aquisição de meios e equipamentos nos serviços
+                        da Direcção, em articulação com estes, em matéria de informática e de telecomunicações;
+                        c) Desenvolver e assegurar a manutenção das aplicações informáticas de suporte as estatísticas e respectivas bases de dados;
+                        d) Velar pelo bom funcionamento e manuseamento do equipamento informático e apoiar os utilizadores na exploração, gestão, manutenção dos equipamentos e sistemas informáticos e de telecomunicações;
+                        e) Planificar e implementar acções de formação e capacitação para técnicos de informática e utilizadores dos sistemas, sob gestão da Direcção;
+
+                        f) Propor a realização feiras de tecnologias e inovação a nível das escolas do Município bem como cooperar com as demais dos outros Municípios; g) Propor a criação de cursos técnicos e consequentemente de escolas
+                        técnicas voltadas na área de tecnologia a nível do Município;
+                        h) Promover a boa utilização dos sistemas informáticos instalados, a sua
+                        rentabilização e actualização, velando pelo bom funcionamento dos equipamentos;
+                        i) Criar sistema de monitorização de todas as escolas a nível do Município;
+                        j) Divulgar as actividades desenvolvidas pela Direcção e responder aos pedidos de informação dos órgãos de comunicação social;
+                        k) Produzir conteúdos informativos para a divulgação nos diversos canais de comunicação;
+                        )1 Exercer as demais competências estabelecidas por lei ou determinadas superiormente.
+                        Subsecção I
+                        (Serviço de Apoio Instrumental)
+                        Artigo 16. ° 
+                        (Área Jurídica)
+                        1. A área Jurídica é serviço de apoio Instrumental, do Director Municipal incumbido de assegurar a execução de tarefas nos domínios de assessoria jurídica e de estudos nos domínios legislativos, regulamentar e contencioso administrativo.
+                        2. A área Jurídica tem as seguintes competências:
+                        a) Emitir pareceres, estudos e informações, no domínio da educação, bem como apreciar reclamações e recursos hierárquicos dirigidos ao Director Municipal;
+                        b) Elaborar propostas, revisar os regulamentos e outros instrumentos
+                        jurídicos necessários para o desenvolvimento funcional da Educação no Município;
+                        c) Promover, participar, coordenar e assegurar a sua execução dos trabalhos preparatórios e as negociações conducentes à celebração de protocolos e contractos de âmbito Municipal bem como outros documentos jurídicos no domínio da Educação e Ensino conforme o caso;
+                        d) Velar pela correcta interpretação e aplicação dos diplomas legais;
+                        e) Contribuir para o incremento do acesso à informação de modo a promover a cultura jurídica, designadamente através da recolha, sistematização, actualização, compilação e anotações objectiva e divulgação da legislação e jurisprudência produzida ou relevante para o sector;
+                        f) Verificar e acompanhar a conformidade dos procedimentos administrativos;
+                        g) Exercer as demais competências estabelecidas por lei ou determinadas superiormente.
+                        3. A área Jurídica é dirigida por um assessor, com habilitações mínimas de Licenciado em Direito, indicado pelo Director Municipal equiparado ao Chefe de Secção.
+                        Artigo 17. °
+                        (Área Administrativa)
+                        A área Administrativa é o serviço que se ocupa na tramitação das questões burocráticas, relações-públicas e higiene da Direcção Municipal.
+                        1. Compete a Área Administrativa:
+                        a) Proceder a recepção e registo de entrada e saída da documentação;
+                        b) Reproduzir todos os documentos da Direcção e zelar pelo arquivo dos mesmos;
+                        c) Orientar e participar na implementação da base de dados da Direcção;
+                        d) Propor a aquisição de outros bens patrimoniais:
+                        e) Secretariar as reuniões do Conselho de Direcção
+                        f) Cumprir e fazer cumprir as orientações emanadas superiormente e impostas por lei.
+                        2. A Área Administrativa é dirigida por um técnico da Direcção, indicado pelo Director Municipal.
+                        CAPÍTULO. VI
+                        (Disposições Finais) Artigo 18. °
+                        Dupla subordinação
+                        No âmbito de execução das suas atribuições a Direcção Municipal da Educação esta sujeita a dupla subordinação jurídica sendo funcional e administrativamente à administração municipal e metodologicamente ao Gabinete Provincial da Educação enquanto órgão desconcentrado do Ministério da Educação.
+                        Artigo 20. °
+                        (Quadro do Pessoal)
+                        O quadro do pessoal da Direcção Municipal da Educação, consta do Anexo I do presente regulamento ao qual faz parte integrante.
+                        Artigo 21. °
+                        (Regime Supletivo)
+                        Em tudo que não estiver previsto no presente regulamento, aplicam-se
+                        supletivamente o Estatuto da Administração Municipal do Púri, aprovado pelo
+                        Decreto Executivo n.º 56/20, de 17 de Fevereiro - Ministério da Administração do Território e em geral toda a legislação que regula o funcionamento da Administração Local do Estado.
+                        Artigo 22. ° (Nomeação)
+                        Os Chefes de Secções são nomeados pelo Administrador Municipal, ouvido o Director Municipal.
+                        Artigo 23. °
+                        (Organigrama)
+                        O organigrama da Direcção Municipal da Educação é o constante no Anexo I deste regulamento do qual faz parte integrante.
+                        Artigo 24. °
+                        (Aprovação)
+                        A presente Proposta de Regulamento Interno é aprovado pelo Administrador Municipal nos termos da lei.
+                        Artigo 25. °
+                        (Entrada em Vigor)
+                        O presente regulamento interno entra em vigor na data da sua publicação em Diário da República.
+
                     </div>
                    </div>
                   </div>

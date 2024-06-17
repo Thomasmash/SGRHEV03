@@ -38,7 +38,15 @@ class PerfilController extends Controller
         return view('sgrhe/perfilview',compact('funcionario','pessoa','parente','naturalidade','endereco','cargo','unidadeOrganica','categoriaFuncionario','arquivos','processos','seccao'));
     }
 
-
+    public function listarProcessosFuncionario($idFuncionario)
+    {
+        //Determinando a Seccao do Fucnionario
+        $funcionario = Funcionario::find($idFuncionario);
+        $pessoa = Pessoa::find($funcionario->idPessoa);
+        $processos = Processo::orderBy('created_at', 'desc')->where('idFuncionarioSolicitante', $idFuncionario)->get();
+        // dd($arquivos->where('categoria','fotodeperfil')->first()->arquivo);
+        return view('sgrhe/processos-funcionario',compact('funcionario','pessoa','processos'));
+    }
     
     public function timelineShow($idFuncionario)
     {

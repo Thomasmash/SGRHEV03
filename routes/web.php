@@ -86,6 +86,10 @@ Route::any('/perfil/{idFuncionario}', [PerfilController::class,'show'])->name('p
 //Time line Show
 Route::any('/timeline/{idFuncionario}', [PerfilController::class,'timelineShow'])->name('timeline.show');
 
+//Processos do Funcionário 
+Route::any('/listar/processos/funcionario/{idFuncionario}', [PerfilController::class,'listarProcessosFuncionario'])->name('listar.processos.funionario');
+
+
 Route::any('/perfil-foto-editor/{idFuncionario}',function(){
     return view('sgrhe/perfil-foto-editor');
 })->name('perfil-foto-editor');

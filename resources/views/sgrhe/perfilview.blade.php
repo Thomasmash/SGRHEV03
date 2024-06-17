@@ -187,7 +187,7 @@
                             </li>
                             <li>
 
-                            <form action="{{ route('ver.ficha.funcionario') }}" method="POST" >
+                              <form action="{{ route('ver.ficha.funcionario') }}" method="POST" >
                                 @csrf
                                 @method('POST')
                                 <input type="hidden" name="categoria" value="FichaFuncionario">
@@ -195,13 +195,16 @@
                                 <input type="submit" class="btn btn-primary w-100 m-1" value="Ficha do Funcionário">
                               </form>
                               <br>
+                              <a href="{{ route('listar.processos.funionario', ['idFuncionario' => $funcionario->id]) }}"  class="nav-link {{ request()->routeIs('timeline.show') ? 'active' : ''}} btn btn-secondary w-100 m-1">
+                                    Processos do Funcionário
+                              </a>
                               @if ( ($permissoes === "Admin") || ($permissoes >= 4) )
                               <form action="{{ route('ver.processos.funcionario') }}" method="POST" >
                                 @csrf
                                 @method('POST')
                                 <input type="hidden" name="categoria" value="FichaFuncionario">
                                 <input type="hidden" name="idFuncionario" value="{{$funcionario->id}}">
-                                <input type="submit" class="btn btn-warning w-100 m-1" value="Processos do Funcionário">
+                                <input type="submit" class="btn btn-warning w-100 m-1" value="Lista de Processos">
                               </form>
                               @endif
                                                       @if ( ($permissoes === "Admin") || ($permissoes >= 4 && $seccao === "RHPE") )
