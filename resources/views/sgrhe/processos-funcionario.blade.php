@@ -266,14 +266,14 @@
                                                           </div>
                                                       </div>
                                                       <div class="card-footer">
-                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Transferencia">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#GuiaMedica">
                                                               Solicitar Guia Médica
                                                             </button>
                                                       </div>
                                                     </div>
                                               </div>
-                                              <!-- Modal Solicitar Transferencia -->
-                                                <div class="modal fade" id="Transferencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <!-- Modal Solicitar Guia Medica -->
+                                                <div class="modal fade" id="GuiaMedica" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                       <div class="modal-header">
@@ -314,8 +314,67 @@
                                                     </div>
                                                   </div>
                                                 </div>
-                                              <!-- Modal Solicitar Licenca -->
-                                            <!--Solicitar Item-->
+                                              <!--/Modal Solicitar Guia Medica -->
+                                            <!--/Solicitar Item-->
+
+                                             <!--Solicitar Item-->
+                                              <div class="col-8 offset-md-2">
+                                                    <div class="card  card-outline card-info">
+                                                      <div class="card-header">
+                                                        <h3 class="card-title">Solicitar   Aposentadoria</h3>
+                                                      </div>
+                                                      <div class="card-body">
+                                                          <div class="card-text">
+                                                            <p>Guia de Solicitação da Aposentadoria do funcionário.</p>
+                                                          </div>
+                                                      </div>
+                                                      <div class="card-footer">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Aposentadoria">
+                                                              Solicitar Aposentadoria
+                                                            </button>
+                                                      </div>
+                                                    </div>
+                                              </div>
+                                              <!-- Modal Solicitar Aposentadoria -->
+                                                <div class="modal fade" id="Aposentadoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Aponsentadoria de {{ $pessoa->nomeCompleto}}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                        <!-- Formulário -->
+                                                        <form action="{{ route('solicitar') }}" method="POST" id="for">                                             
+                                                          @csrf
+                                                          @method('POST')
+                                                          <div class="form-group">
+                                                            Obs.:<label class="text-muted" for="confirmar">Confirme para dar início ao processo de aposentadoria. </label>
+                                                            <select class="form-control" name="confirmar" id="">
+                                                              <option class="text-danger font-weight-bold" value="false">Não Confirmar</option>
+                                                              <option class="text-success font-weight-bold" value="true">Confirmar Submisão de Processo de Aposentadoria</option>
+                                                            </select>
+                                                          </div>
+                                                          <div class="form-group">
+                                                            <input type="hidden" class="form-control" name="idFuncionario" value="{{ isset($idFuncionario) ? $idFuncionario :  $funcionario->id }}">
+                                                            <input type="hidden" class="form-control" name="categoria" value="Aposentadoria">
+                                                            <input type="hidden" class="form-control" name="natureza" value="Requerimento">
+                                                            <input type="hidden" class="form-control" name="seccao" value="SecretariaGeral">     
+                                                            <input type="hidden" class="form-control" name="idFuncionarioSolicitante" value="{{ isset($idFuncionario) ? $idFuncionario  : $funcionario->id }}">    
+                                                          </div>
+                                                          <button type="submit" class="btn btn-primary">Submeter</button>
+                                                        </form>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <small id="" class="form-text text-muted">Consulte o Deferimento na Linha de Tempo de {{ $pessoa->nomeCompleto}}</small>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              <!--/Modal Solicitar Aposentadoria -->
+                                            <!--/Solicitar Item-->
 
                                             <!--Solicitar Item-->
                                               <div class="col-8 offset-md-2">

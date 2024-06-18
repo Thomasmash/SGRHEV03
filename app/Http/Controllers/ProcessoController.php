@@ -350,8 +350,13 @@ class ProcessoController extends Controller
     //Solicitar Processos Genericos 
     public function solicitar(Request $request)
     { 
-       // dd($request->all());
-       //Verificar Sttus do Funcionário se é aplicavel para Socicitacao do servico //23121997
+        //Verificar se é processo de aposentadoria 
+        if (isset($request['confirmar'])) {
+            if ($request['confirmar'] === "false") {
+                return redirect()->back()->with('error', 'Processo de aposentadoria Canselado com sucesso!');
+            }
+        }
+       //Verificar Status do Funcionário se é aplicavel para Socicitacao do servico //23121997
        $FuncionarioSolicitante = Funcionario::find($request->idFuncionarioSolicitante)->estado;
        if ($FuncionarioSolicitante === "Falecido" || $FuncionarioSolicitante === "Aposentado") {
         return redirect()->back()->with('error', 'O Funcionário  não pode solicitar serviços por estar em estado Inactivo ou Aposentado, em caso de erro dirija-se a Repartição Municipal da Educação');
@@ -513,6 +518,16 @@ class ProcessoController extends Controller
         $processos = Processo::orderBy('created_at', 'desc')->where('idFuncionarioSolicitante', $funcionarioSolicitante->id)->get();
         $pessoaSolicitante = Pessoa::where('id',$funcionarioSolicitante->idPessoa)->first();
         return view('sgrhe/pages/tables/processos-funcionario',compact('funcionarioSolicitante','processos','pessoaSolicitante'));
+ 
+    }
+
+    public function verArquivosFuncionario(Request $request)
+    {
+       // dd('Processos');
+        $funcionarioSolicitante = Funcionario::find($request->idFuncionario);
+        $arquivos = Arquivo::orderBy('created_at', 'desc')->where('idFuncionario', $funcionarioSolicitante->id)->get();
+        $pessoaSolicitante = Pessoa::where('id',$funcionarioSolicitante->idPessoa)->first();
+        return view('sgrhe/pages/tables/arquivos-funcionario',compact('funcionarioSolicitante','arquivos','pessoaSolicitante'));
  
     }
     

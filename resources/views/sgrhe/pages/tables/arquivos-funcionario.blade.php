@@ -5,7 +5,7 @@
 @endphp
 <!--Layout Principal //23121997-->
 @extends('layouts.app')
-  @section('titulo' , 'Processos de Funcionários'  )
+  @section('titulo' , 'Arquivos do Funcionário'  )
         @section('header')
         <!--Style Local-->
           <!-- DataTables -->
@@ -24,12 +24,12 @@
                 <div class="container-fluid">
                   <div class="row mb-2">
                     <div class="col-sm-6">
-                      <h1>Processos de {{ $pessoaSolicitante->nomeCompleto }} </h1>
+                      <h1>Arquivos de {{ $pessoaSolicitante->nomeCompleto }} </h1>
                     </div>
                     <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      
+                        <li class="breadcrumb-item"><a href="#">Arquivos de {{ $pessoaSolicitante->nomeCompleto }}</a></li>
                       </ol>
                     </div>
                   </div>
@@ -44,78 +44,49 @@
                       <div style="background-color: #ffffff;" class="card card-primary">
 
                        <div class="card-header">
-                                <h3 class="card-title">Processos</h3>
+                                <h3 class="card-title">Arquivos</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                               <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                  <th>Estado</th>
-                                  <th>Funcionário Solicitante </th>
                                   <th>Categoria</th>
-                                  <th>Data de Submissão</th>
-                                  <th>Secção</th>
-                                  <th>Natureza</th>
-                                  <th>Deferimento</th>
-                                  <th>Funcionário Processador</th>
+                                  <th>Funcionário</th>
+                                  <th>Data de Criacão</th>
+                                  <th>Data de actualização</th>
                                   <th>Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <!--Gerando a Tabela de forma Dinamica //23121997-->
-                                @foreach ($processos as $processo)
+                                @foreach ($arquivos as $arquivo)
                                               <tr>
                                                   @php
-                                                    $documento = App\Models\Arquivo::where('id', $processo->idArquivo);
-                                                    $funcionarioSolicitante = App\Models\Funcionario::where('id', $processo->idFuncionarioSolicitante)->first();
-                                                    $pessoaSolicitante = App\Models\Pessoa::where('id', $funcionarioSolicitante->idPessoa)->first();
-                                                    // echo($documento->first()->caminho);    
-                                                    $funcionario = App\Models\Funcionario::find($processo->idFuncionario);
+                                                    $funcionario = App\Models\Funcionario::find($arquivo->idFuncionario);
                                                     $pessoaFuncionario = App\Models\Pessoa::find($funcionario->idPessoa);
                                                   @endphp
-                                                  <td class="{{ ($processo->estado =='Submetido') ? 'text-success' : '' }} {{ ($processo->estado =='Cancelado') ? 'text-danger' : '' }}" style="font-weight: bolder;">{{ $processo->estado }}</td>
-                                                  <td> {{ $pessoaSolicitante->nomeCompleto}}</td>
-                                                  <td>{{ $processo->categoria }}</td>
-                                                  <td>{{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse($processo->created_at))) }}</td>
-                                                  <td>{{ $processo->seccao }}</td>
-                                                  <td>{{ $processo->natureza }}</td>                                                 
-                                                  <td>{{ $processo->deferimento === "" ? $processo->deferimento : "Sem Deferimento" }}</td>
-                                                  <td>{{ $pessoaFuncionario->nomeCompleto }}</td>
-                                                   <td>
-                                                   <form class="{{ (($processo->estado == 'Submetido') && !($processo->categoria == 'Nomeacao')) ? 'd-inline' : 'd-none'}}" action="{{ route('solicitacao.cancelar', ['idProcesso' => $processo->id ]) }}" method="POST" id="deleteForm{{ $processo->id }}">
-                                                      @csrf
-                                                      @method('POST')
-                                                      <input type="hidden" name="Request"  value="{{$processo->Request}}">
-                                                      <button type="submit" class="btn btn-danger" onclick="confirmAndSubmit(event, 'Confirmar cancelar a solicitação?', 'Sim, Confirmar!', 'Não, Cancelar!')" >Cancelar Solictacao</button>
-                                                    </form>
-                                                    @if ($documento->exists()) 
-                                                      <a href="{{ route('Exibir.Imagem', ['imagem' => base64_encode( $documento->first()->caminho )]) }}" class="btn btn-secondary {{ ($processo->estado == 'Aprovado' || $processo->estado == 'Desfavoravel' || $processo->estado == 'Favoravel') ? 'd-inline' : 'd-none'}} ">Baixar Documento</a>
-                                                    @endif
-                                                    <form class="{{ ($processo->estado == 'Submetido') ? 'd-inline' : 'd-none'}}"  action="{{ route('solicitacao.preview')}}" method="POST" >
-                                                      @csrf
-                                                      @method('POST')
-                                                      <input type="hidden" name="Request" value="{{$processo->Request}}">
-                                                      <input type="hidden" name="idProcesso" value="{{$processo->id}}">
-                                                      <button type="submit" class="btn btn-info">Ver Documento</button>
-                                                    </form>
-                                                      @if ( ($permissoes === "Admin") || ($permissoes >= 4 && $seccao === "RHPE") )
-                                                       Botoes de Permissao
-                                                      @endif 
+                                                 
+                                                  <td> {{ $pessoaFuncionario->nomeCompleto}}</td>
+                                                  <td> {{ $arquivo->categoria}}</td>
+                                                  <td>{{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse($arquivo->created_at))) }}</td>
+                                                  <td>{{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse($arquivo->updated_at))) }}</td>
+                                                  <td>
+                                                            <!--BTN  de ver Arquivo -->
+                                                              <a class="btn btn-primary" href="{{ route('exibir.doc', ['documento' => base64_encode($arquivo->caminho)]) }}" target="_blank">
+                                                                <i class="far fa-file-alt mr-1"></i> Ver Arquivo
+                                                              </a>
+                                                            <!--/BTN de ver Arquivo -->
                                                   </td>
                                               </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                  <th>Estado</th>
-                                  <th>Funcionário Solicitante </th>
                                   <th>Categoria</th>
-                                  <th>Data de Submissão</th>
-                                  <th>Secção</th>
-                                  <th>Natureza</th>
-                                  <th>Deferimento</th>
-                                  <th>Funcionário Processador</th>
+                                  <th>Funcionário</th>
+                                  <th>Data de Criacão</th>
+                                  <th>Data de actualização</th>
                                   <th>Opções</th>
                                 </tr>
                                 </tfoot>

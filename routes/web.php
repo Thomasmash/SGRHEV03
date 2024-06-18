@@ -295,6 +295,10 @@ Route::post('/homologar/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionario
 //Solicitar Lista de Processos de Um Funcionario
 Route::any('/ver/processos/funcionario',[ProcessoController::class, 'verProcessosFuncionario'])->name('ver.processos.funcionario'); 
 
+//Solicitar Lista de Arquivos do Um Funcionario
+Route::any('/ver/arquivos/funcionario',[ProcessoController::class, 'verArquivosFuncionario'])->name('ver.arquivos.funcionario'); 
+
+
 
 //Assinaturas / ficheiros
 Route::any('/assinatura/update', [AssinaturaController::class,'assinaturaUpdate'])->name('assinatura.update');

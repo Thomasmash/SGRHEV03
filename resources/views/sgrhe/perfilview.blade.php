@@ -206,6 +206,14 @@
                                 <input type="hidden" name="idFuncionario" value="{{$funcionario->id}}">
                                 <input type="submit" class="btn btn-warning w-100 m-1" value="Lista de Processos">
                               </form>
+                              <form action="{{ route('ver.arquivos.funcionario') }}" method="POST" >
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="categoria" value="FichaFuncionario">
+                                <input type="hidden" name="idFuncionario" value="{{$funcionario->id}}">
+                                <input type="submit" class="btn btn-light w-100 m-1" value="Lista de Arquivos">
+                              </form>
+                          
                               @endif
                                                       @if ( ($permissoes === "Admin") || ($permissoes >= 4 && $seccao === "RHPE") )
                                                       <form action="{{ route('funcionarios.form', ['id' => $funcionario->idPessoa]) }}" method="POST" style="display: inline;">

@@ -164,15 +164,27 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
         <div class="corpo">
                 <div class="titulo ">
                         <br>
-                        <p>FICHA DO FUNCIONÁRIO </p>
+                         <p>Solicitação de Aposentadoria </p>
                         <br>
                 </div>
                 <div class="corpo">
                         <p>
-                        <span style="font-weight: bold;">{{ $pessoa->nomeCompleto }}</span>, solteiro de {{ $pessoa->dataNascimento }} anos de idade, filho de  {{ $parente->nomePai }}, e de {{ $parente->nomeMae }}, nascido aos {{ $pessoa->dataNascimento }}, natural de {{ $naturalidade->municipio }}, Município de  {{ $naturalidade->municipio }}, Província de {{ $naturalidade->provincia }}, portador do B.I. nº {{ $pessoa->numeroBI }}.
+                        <span style="font-weight: bold;">{{ $pessoa->nomeCompleto }}</span>, solteiro de {{ date('Y')-strftime('%Y', strtotime(\Carbon\Carbon::parse($pessoa->dataNascimento))) }}  anos de idade, filho de  {{ $parente->nomePai }}, e de {{ $parente->nomeMae }}, nascido aos  {{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse($pessoa->dataNascimento))) }}, natural de {{ $naturalidade->municipio }}, Município de  {{ $naturalidade->municipio }}, Província de {{ $naturalidade->provincia }}, portador do B.I. nº {{ $pessoa->numeroBI }}.
                         </p>
                         <p>
-                         É {{ $cargo->designacao }}, convertido na categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }}, salario base de {{ $categoriaFuncionario->salariobase }} com o número de agente {{ $funcionario->numeroAgente }} colocado na Unidade Organica, {{ $unidadeOrganica->designacao }}.
+                        Tendo iniciado suas funcões no Sector da Educuação desde {{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse($funcionario->dataAdmissao)))}} no {{ "dados do Termo de inicio de funcoes municipio provincia escola "}}.
+                        </p>
+                        <p>
+                                Tabela das escolas e municipios passados pelo professor. 
+                        </p>
+                        <p>
+                                Necessidando de sua Reforma.
+                        </p>
+                        <p>
+                        Vem mui respeitosamente requerer a Vossa Excelência Directora Provincial da Educação se digne autorizar pelo que:
+                        </p>
+                        <p>
+                        Espera deferimento.
                         </p>
                 </div>
                 <div class="data-local">
@@ -195,7 +207,7 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                        <div style="position:absolute; z-index:2; width:100%;">
                        <p style="font-weight: bold;">{{ ($pessoa->genero == 'Femenino') ? 'A' : 'O' }} Funcionário</p>
                                 <p style="margin: 0; padding:0;">____________________________</p>
-                                <p style="margin: 0; padding:0; font-weight: bold;"> {{ App\Models\Pessoa::find(session()->only(['funcionario'])['funcionario']->idPessoa)->nomeCompleto }}</p>
+                                <p style="margin: 0; padding:0; font-weight: bold;"> {{ $pessoa->nomeCompleto }}</p>
                        </div>
 
                 </div>
