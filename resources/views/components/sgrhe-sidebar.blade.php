@@ -58,10 +58,10 @@
                                
                                 
                           <li class="nav-item">
-                                <a href="{{ route('timeline.show', ['idFuncionario' => $funcionarioLogado->id]) }}"  class="nav-link {{ request()->routeIs('timeline.show') ? 'active' : ''}}">
+                                <a href="{{ route('listar.processos.funionario', ['idFuncionario' => $funcionarioLogado->id]) }} "  class="nav-link {{ request()->routeIs('listar.processos.funionario') ? 'active' : ''}}">
                                 <i class="bi bi-calendar2-range"></i>  
                                 <p class="item-1">
-                                    Linha de Tempo
+                                    Linha de Tempo/ Processos do Funcionário
                                   </p>
                                 </a>
                           </li>
