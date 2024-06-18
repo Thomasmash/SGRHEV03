@@ -121,7 +121,7 @@
                             </div>
                             <!--Inputs Automaticos com dados da Unidade Organica etc..-->
                             <input type="hidden" name="idUnidadeOrganica" value="{{ $unidadeOrganicaSelected->id}}">
-                            <input type="hidden" name="idDirector" value="{{  session()->only(['idFuncionario'])['idFuncionario'] }}">
+                            <input type="hidden" name="idDirector" value="{{  $funcionarioLogado->id }}">
                             <input type="hidden" name="trimestre" value="{{ $trimestre }}">
                             <input type="hidden" name="anoLectivo" value="{{ $anoLectivo }}">
                             <button type="submit" style="font-weight: bold;" class="btn btn-primary w-100" onclick="confirmAndSubmit(event, 'Confirmar Submeter o Formulário de Aproveitamento?', 'Sim, Confirmar!', 'Não, Cancelar!')"> Verificar e Enviar</button>
