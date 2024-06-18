@@ -253,6 +253,69 @@
                                               <!-- Modal Solicitar Licenca -->
                                             <!--Solicitar Item-->
                                           @endif
+                                           
+                                          <!--Solicitar Item-->
+                                           <div class="col-8 offset-md-2">
+                                                    <div class="card  card-outline card-info">
+                                                      <div class="card-header">
+                                                        <h3 class="card-title">Solicitar Guia Médica</h3>
+                                                      </div>
+                                                      <div class="card-body">
+                                                          <div class="card-text">
+                                                            <p>Solicicite uma Guia Mádica com autorização para seguir viajem para tratar de problemas de saúde.</p>
+                                                          </div>
+                                                      </div>
+                                                      <div class="card-footer">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Transferencia">
+                                                              Solicitar Guia Médica
+                                                            </button>
+                                                      </div>
+                                                    </div>
+                                              </div>
+                                              <!-- Modal Solicitar Transferencia -->
+                                                <div class="modal fade" id="Transferencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Guia Médica de {{ $pessoa->nomeCompleto}}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                        <!-- Formulário -->
+                                                        <form action="{{ route('solicitar') }}" method="POST" id="for">                                             
+                                                          @csrf
+                                                          @method('POST')
+                                                          <div class="form-group">
+                                                            <label for="motivo">Unidade Hospitalar</label>
+                                                            <input class="form-control" name="unidadeHospitalar" type="text" maxlength="250" placeholder="Hospital Municipal do Uíge">
+                                                          </div>
+
+                                                          <div class="form-group">
+                                                            <label for="motivo">Situação Médica</label>
+                                                            <textarea class="form-control" name="situacao" id="texto" placeholder="Descreva a Situação Médica" required></textarea>
+                                                            <small class="text-muted"id="contadorCaracteres" > </small>
+                                                          </div>
+
+                                                          <div class="form-group">
+                                                            <input type="hidden" class="form-control" name="idFuncionario" value="{{ isset($idFuncionario) ? $idFuncionario :  $funcionario->id }}">
+                                                            <input type="hidden" class="form-control" name="categoria" value="GuiaMedica">
+                                                            <input type="hidden" class="form-control" name="natureza" value="Requerimento">
+                                                            <input type="hidden" class="form-control" name="seccao" value="SecretariaGeral">     
+                                                            <input type="hidden" class="form-control" name="idFuncionarioSolicitante" value="{{ isset($idFuncionario) ? $idFuncionario  : $funcionario->id }}">    
+                                                          </div>
+                                                          <button type="submit" class="btn btn-primary">Submeter</button>
+                                                        </form>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <small id="" class="form-text text-muted">Consulte o Deferimento na Linha de Tempo de {{ $pessoa->nomeCompleto}}</small>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              <!-- Modal Solicitar Licenca -->
+                                            <!--Solicitar Item-->
 
                                             <!--Solicitar Item-->
                                               <div class="col-8 offset-md-2">
